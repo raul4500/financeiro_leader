@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela para PDF</title>
+    <style>
+        .mapa-onibus{
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        .mapa-onibus table td{
+            border: 1px solid black;
+            background-color: aqua;
+            width: 50px;
+            height: 50px;
+            text-align: center;
+        }
+
+        .mapa-onibus .space{
+            border: none;
+            width: 20px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <h1>Minha Tabela</h1>
+    <table id="mapa-onibus">
+        <tbody>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+            <tr>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td class="space"></td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+                <td>o</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <button id="baixar">Baixar PDF</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+    <script>
+        document.getElementById("baixar").onclick = function () {
+            const tabela = document.getElementById("tabela");
+
+            // Configuração do HTML2PDF para gerar o PDF
+            const opt = {
+                margin: 1,
+                filename: 'tabela.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Gerar o PDF a partir da tabela mantendo os estilos
+            html2pdf().from(tabela).set(opt).save();
+        };
+    </script>
+</body>
+
+</html>
