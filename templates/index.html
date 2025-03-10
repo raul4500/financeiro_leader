@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../static/styles/modal.css">
     <title>Financeiro-Leader</title>
 
     <style>
@@ -16,7 +17,7 @@
         }
 
         h2 {
-            margin: 20px;
+            margin: 16px;
 
         }
 
@@ -31,13 +32,14 @@
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #dad7d7;
+            border-radius: 4px;
+            background:rgb(146, 146, 146);
         }
 
         .caixa-de-avisos {
             border: 2px solid rgb(255, 211, 90);
             background-color: rgb(255, 241, 204);
-            height: 200px;
+            height: 150px;
             padding: 10px;
             margin: 10px;
             border-radius: 16px;
@@ -50,7 +52,7 @@
         }
 
         .passageiros {
-            height: 504px;
+            height: 434px;
             border: 1px solid black;
             width: 50%;
             padding: 0;
@@ -88,6 +90,7 @@
         }
 
         .opcoes-passageiros button.adicionar {
+            cursor: pointer;
             background-color: rgb(186, 255, 203);
             color: rgb(0, 0, 0);
             border: 1px solid green;
@@ -104,10 +107,10 @@
         }
 
         .tabela-passageiros {
-            height: auto;
+            height: 280px;
             max-width: 100%;
             white-space: nowrap;
-            overflow-x: scroll;
+            overflow-y: scroll;
             padding: 0px;
         }
 
@@ -128,6 +131,45 @@
             border-bottom: 1px solid rgb(163, 163, 163);
             padding: 10px 0px 10px 8px;
             text-align: left;
+        }
+
+        .tabela-passageiros td button{
+            padding: 8px;
+            border-radius: 4px;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+        }
+
+        .tabela-passageiros td button:hover{
+            background-color: rgb(214, 214, 214);
+        }
+
+        .tabela-passageiros td .nome{
+            max-width: 250px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .todos-passageiros button{
+            cursor: pointer;
+            position: relative;
+            top: 16px;
+            left: 50%;
+            transform: translate(-50%, 0);
+            width: 35%;
+            height: 50px;
+            border-radius: 8px;
+            border: 1px solid rgb(117, 117, 117);
+            padding: 10px;
+            word-wrap: none;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .todos-passageiros button:hover{
+            background-color: rgb(117, 117, 117);
+            color: white;
         }
 
         .viagens {
@@ -157,7 +199,13 @@
             padding: 10px;
         }
 
-        .ver-todos button {
+        .pesquisa-viagens button:hover {
+            background-color: rgb(117, 117, 117);
+            color: white;
+        }
+
+        .ver-todas-viagens {
+            cursor: pointer;
             width: 35%;
             height: 50px;
             border-radius: 8px;
@@ -168,13 +216,8 @@
             text-overflow: ellipsis;
         }
 
-        .pesquisa-viagens button:hover {
-            background-color: rgb(117, 117, 117);
-            color: white;
-        }
-
         .viagens-blocks {
-            height: 400px;
+            height: 329px;
             overflow-y: scroll;
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
@@ -189,6 +232,7 @@
             padding: 16px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
         }
+
     </style>
 
 </head>
@@ -207,67 +251,95 @@
 
             <div class="opcoes-passageiros">
                 <input type="text" placeholder="Nome">
-                <button class="adicionar" onclick=""><i class="bi bi-plus" style="font-size: 16px;"></i>Add</button>
+                <button class="adicionar" id="openModalBtn"><i class="bi bi-plus" style="font-size: 16px;"></i>Add</button>
             </div>
 
             <div class="tabela-passageiros">
                 <table cellspacing="0" rules="none">
                     <tr>
+                        <th></th>
                         <th>Nome</th>
-                        <th>CPF</th>
                         <th>Telefone</th>
-                        <th>Opções</th>
+                        <th>Status</th>
                     </tr>
                     <tr>
-                        <td>Raul ferreira borges</td>
-                        <td>123.456.789-00</td>
-                        <td>(11) 99999-9999</td>
                         <td>
-                            <button>Editar</button>
-                            <button>Excluir</button>
+                            <button><i class='bi bi-three-dots-vertical'></i></button>
                         </td>
+                        <td><div class="nome">Raul Ferreia qqqqqqqqqqqqqqqqqqqqqqqqqLessa Borfges</div></td>
+                        <td>(11) 99999-9999</td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>Raul ferreira borges</td>
-                        <td>123.456.789-00</td>
-                        <td>(11) 99999-9999</td>
                         <td>
-                            <button>Editar</button>
-                            <button>Excluir</button>
+                            <button><i class='bi bi-three-dots-vertical'></i></button>
                         </td>
+                        <td><div class="nome">Raul Ferreia qqqqqqqqqqqqqqqqqqqqqqqqqLessa Borfges</div></td>
+                        <td>(11) 99999-9999</td>
+                        <td></td>
                     </tr>
                     <tr>
-                        <td>Raul ferreira borges</td>
-                        <td>123.456.789-00</td>
-                        <td>(11) 99999-9999</td>
                         <td>
-                            <button>Editar</button>
-                            <button>Excluir</button>
+                            <button><i class='bi bi-three-dots-vertical'></i></button>
                         </td>
+                        <td><div class="nome">Raul Ferreia qqqqqqqqqqqqqqqqqqqqqqqqqLessa Borfges</div></td>
+                        <td>(11) 99999-9999</td>
+                        <td></td>
                     </tr>
-                    <!--{% for c in clientes %}
+                    <tr>
+                        <td>
+                            <button><i class='bi bi-three-dots-vertical'></i></button>
+                        </td>
+                        <td><div class="nome">Raul Ferreia qqqqqqqqqqqqqqqqqqqqqqqqqLessa Borfges</div></td>
+                        <td>(11) 99999-9999</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button><i class='bi bi-three-dots-vertical'></i></button>
+                        </td>
+                        <td><div class="nome">Raul Ferreia qqqqqqqqqqqqqqqqqqqqqqqqqLessa Borfges</div></td>
+                        <td>(11) 99999-9999</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button><i class='bi bi-three-dots-vertical'></i></button>
+                        </td>
+                        <td><div class="nome">Raul Ferreia qqqqqqqqqqqqqqqqqqqqqqqqqLessa Borfges</div></td>
+                        <td>(11) 99999-9999</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <button><i class='bi bi-three-dots-vertical'></i></button>
+                        </td>
+                        <td><div class="nome">Raul Ferreia qqqqqqqqqqqqqqqqqqqqqqqqqLessa Borfges</div></td>
+                        <td>(11) 99999-9999</td>
+                        <td></td>
+                    </tr>
+                <!--{% for c in clientes %}
                 <tr>
-                    <td>{{ c.nome }}</td>
-                    <td>{{ c.cpf }}</td>
-                    <td>{{ c.telefone }}</td>
-                    <td>
-                        <button>Editar</button>
-                        <button>Excluir</button>
-                    </td>
-                </tr>
+                        <td>
+                            <button><i class='bi bi-three-dots-vertical'></i></button>
+                        </td>
+                        <td><div class="nome">Raul Ferreia qqqqqqqqqqqqqqqqqqqqqqqqqLessa Borfges</div></td>
+                        <td>(11) 99999-9999</td>
+                        <td></td>
+                    </tr>
                 {% endfor %}-->
                 </table>
             </div>
             
             <div class="todos-passageiros">
-                    <button class="ver-todos">Ver Todos</button>
+                    <button class="ver-todos-passageiros">Ver Todos</button>
             </div>
 
         </div>
         <div class="viagens">
             <div class="pesquisa-viagens">
                 <input type="text" placeholder="Destino da viagem">
-                <button onclick="">Ver Todas</button>
+                <button class="ver-todas-viagens" onclick="">Ver Todas</button>
             </div>
             <div class="viagens-blocks">
                 <div class="block">t</div>
@@ -285,6 +357,91 @@
             </div>
         </div>
     </div>
+
+    <!-- O Modal -->
+  <div id="myModal" class="modal">
+    <div class="modal-content">
+      <span class="close" id="closeModalBtn">&times;</span>
+      <div class="modal-header">
+        <h2>Adicionar Dados de Pessoa</h2>
+      </div>
+      <form id="formPessoa">
+        <div class="modal-body">
+          <label for="nome">Nome:</label>
+          <input type="text" id="nome" name="nome" required placeholder="Digite o nome">
+
+          <label for="rg">RG:</label>
+          <input type="text" id="rg" name="rg" required placeholder="Digite o RG">
+
+          <label for="dataNascimento">Data de Nascimento:</label>
+          <input type="date" id="dataNascimento" name="dataNascimento">
+
+          <label for="telefone">Telefone:</label>
+          <input type="tel" id="telefone" name="telefone" required placeholder="Digite o telefone">
+
+          <label for="status">Status:</label>
+          <select id="status" name="status" required>
+            <option value="ativo">Ativo</option>
+            <option value="inativo">Inativo</option>
+            <option value="pendente">Pendente</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="submit">Adicionar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+
 </body>
+
+<script>
+    // Obtendo elementos
+    const modal = document.getElementById("myModal");
+    const openModalBtn = document.getElementById("openModalBtn");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    // Função para abrir o modal
+    openModalBtn.onclick = function() {
+      modal.style.display = "block";
+    }
+
+    // Função para fechar o modal
+    closeModalBtn.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // Fechar o modal quando clicar fora dele
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+
+    // Função para adicionar dados
+    document.getElementById("formPessoa").onsubmit = function(event) {
+      event.preventDefault();
+
+      const nome = document.getElementById("nome").value;
+      const rg = document.getElementById("rg").value;
+      const dataNascimento = document.getElementById("dataNascimento").value;
+      const telefone = document.getElementById("telefone").value;
+      const status = document.getElementById("status").value;
+
+      alert(`Dados Adicionados:
+      Nome: ${nome}
+      RG: ${rg}
+      Data de Nascimento: ${dataNascimento}
+      Telefone: ${telefone}
+      Status: ${status}`);
+
+      // Fechar o modal após adicionar os dados
+      modal.style.display = "none";
+
+      // Limpar os campos do formulário
+      document.getElementById("formPessoa").reset();
+    }
+  </script>
 
 </html>
