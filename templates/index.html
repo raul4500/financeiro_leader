@@ -39,8 +39,8 @@
         .caixa-de-lembretes {
             display: flex;
             flex-direction: row;
-            border: 2px solid rgb(255, 211, 90);
-            background-color: rgb(255, 241, 204);
+            border: 2px solid rgb(117, 117, 117);
+            background-color: rgb(240, 240, 240);
             height: 230px;
             padding: 0px;
             margin: 10px;
@@ -50,7 +50,7 @@
 
         .caixa-de-lembretes .left{
             width: 30%;
-            border-right: 2px solid rgb(255, 211, 90);
+            border-right: 2px solid rgb(117, 117, 117);
         }
 
         .caixa-de-lembretes .left textarea{
@@ -82,7 +82,7 @@
             color: rgb(0, 0, 0);
             border: 1px solid green;
         }
-
+ 
         .caixa-de-lembretes .left .adicionar-lembrete:hover{
             background-color: rgb(38, 139, 64);
             color: white;
@@ -94,8 +94,8 @@
         }
 
         .caixa-de-lembretes .right .lembrete{
-            border: 1px solid rgb(255, 138, 28);
-            background-color: rgb(255, 241, 204);
+            border: 1px solid rgb(148, 148, 148);
+            background-color: rgb(211, 211, 211);
             width: fit-content;
             border-radius: 50px;
             margin: 8px;
@@ -103,7 +103,7 @@
         }
 
         .caixa-de-lembretes .right .lembrete:hover{
-            background-color: rgb(255, 178, 105);
+            background-color: rgb(235, 225, 217);
         }
         
         .caixa-de-lembretes .right .lembrete button{
@@ -297,7 +297,7 @@
         }
 
         .block {
-            background-color: #acfbff;
+            background-color: #ebebeb;
             height: fit-content;
             border-radius: 8px;
             padding: 16px;
@@ -306,7 +306,7 @@
         }
 
         .block:hover {
-            background-color: #7fffd4;
+            background-color: #9b9b9b;
         }
     </style>
 
@@ -316,8 +316,8 @@
 
     <div class="caixa-de-lembretes">
         <form class="left" action="/" method="POST">
-            <h2>lembretes</h2>
-            <textarea name="adicionar-lembretes" placeholder="Adicione um lembrete ou lembrete..." id="adicionar-lembretes" required></textarea>
+            <h2>Lembretes</h2>
+            <textarea name="adicionar-lembretes" placeholder="Adicione um lembrete..." id="adicionar-lembretes" required></textarea>
             <button type="submit" class="adicionar-lembrete">Adicionar lembrete</button>
         </form>
     <div class="right">
