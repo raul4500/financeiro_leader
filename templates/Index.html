@@ -119,10 +119,17 @@
             padding: 0px;
         }
 
+        .content-titulo {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+        }
+
         .content {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
+            background-color: antiquewhite;
         }
 
         .passageiros {
@@ -246,6 +253,7 @@
         }
 
         .viagens {
+            height: 100%;
             width: 50%;
             padding: 0;
             margin: 10px;
@@ -362,7 +370,7 @@
 
                 </div>
             </div>
-            <div class="content">
+            <div class="content-titulo">
                 <h2>PASSAGEIROS</h2>
                 <h2>VIAGENS</h2>
             </div>
@@ -578,6 +586,11 @@
         // Limpar os campos do formulário
         document.getElementById("formPessoa").reset();
     }
+
+    const minhaDiv = document.querySelector('.container');
+
+    // Aplica a posição aleatória e altura até o final da tela
+
 </script>
 
 </html>
