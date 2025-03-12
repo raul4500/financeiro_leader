@@ -34,6 +34,10 @@
     text-decoration: none;
 }
 
+.sidebar a.bell{ 
+    display: none;
+}
+
 .sidebar-item:active {
     background-color: rgba(0, 0, 0, 0.363);
     border-radius: 8px;
@@ -50,4 +54,23 @@
     height: 100%;
     padding: 0px;
     overflow-y: scroll;
+}
+
+@media (max-width: 1000px) {
+    .main{
+        flex-direction: column;
+    }
+
+    .sidebar{
+        height: auto;
+        width: 100%;
+        flex-direction: row;
+    }
+}
+
+@media (max-width: 700px){
+
+    .sidebar a.bell{
+        display: block;
+    }
 }

@@ -119,21 +119,14 @@
             padding: 0px;
         }
 
-        .content-titulo {
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-        }
-
         .content {
             display: flex;
             flex-direction: row;
             justify-content: space-around;
-            background-color: antiquewhite;
         }
 
         .passageiros {
-            height: 434px;
+            height: auto;
             width: 50%;
             padding: 0;
             margin: 10px;
@@ -159,7 +152,7 @@
         }
 
         .opcoes-passageiros button {
-            width: 30%;
+            width: 35%;
             height: 50px;
             border-radius: 8px;
             border: 1px solid rgb(117, 117, 117);
@@ -179,6 +172,11 @@
         .opcoes-passageiros button.adicionar-passageiro:hover {
             background-color: rgb(38, 139, 64);
             color: white;
+        }
+
+        .opcoes-passageiros .adicionar-passageiro i {
+            line-height: 10px;
+            font-size: 30px;
         }
 
         .opcoes-passageiros button:hover {
@@ -320,20 +318,43 @@
             background-color: #9b9b9b;
         }
 
-        @media(max-width: 700px){
-            body{
-                background-color: blue;
+        @media(max-width: 1000px) {
+            .content {
+                display: flex;
+                flex-direction: column;
             }
+
+            .passageiros {
+                width: auto;
+                height: 500px;
+            }
+
+            .viagens {
+                width: auto;
+            }
+        }
+
+        @media(max-width: 700px) {
+
 
             .caixa-de-lembretes {
                 display: none;
             }
 
-            .container {
+            .content {
+                display: flex;
                 flex-direction: column;
             }
-        }
 
+            .passageiros {
+                width: auto;
+                height: 500px;
+            }
+
+            .viagens {
+                width: auto;
+            }
+        }
     </style>
 
 </head>
@@ -342,9 +363,20 @@
 
     <div class="main">
         <div class="sidebar">
-            <a href="Index.html"><div class="sidebar-item"><i class="bi bi-house-fill"></i></div></a>
-            <a href="Passageiros.html"><div class="sidebar-item"><i class="bi bi-person-fill"></i></div></a>
-            <a href=""><div class="sidebar-item"><i class="bi bi-airplane-fill"></i></div></a>
+            <a href="Index.html">
+                <div class="sidebar-item"><i class="bi bi-house-fill"></i></div>
+            </a>
+            <a href="Passageiros.html">
+                <div class="sidebar-item"><i class="bi bi-person-fill"></i></div>
+            </a>
+            <a href="">
+                <div class="sidebar-item"><i class="bi bi-airplane-fill"></i></div>
+            </a>
+            <a href="" class="bell">
+                <div class="sidebar-item"><i class="bi bi-bell-fill"></i></div>
+            </a>
+             
+
         </div>
 
         <div class="container">
@@ -385,17 +417,14 @@
 
                 </div>
             </div>
-            <div class="content-titulo">
-                <h2>PASSAGEIROS</h2>
-                <h2>VIAGENS</h2>
-            </div>
             <div class="content">
                 <div class="passageiros">
-
+                    <h2>PASSAGEIROS</h2>
                     <div class="opcoes-passageiros">
                         <input type="text" placeholder="Nome">
-                        <button class="adicionar-passageiro" id="openModalBtn"><i class="bi bi-plus"
-                                style="font-size: 16px;"></i>Adicionar Passageiro</button>
+                        <button class="adicionar-passageiro" id="openModalBtn">
+                            <i class="bi bi-plus"></i>
+                        </button>
                     </div>
 
                     <div class="tabela-passageiros">
@@ -494,7 +523,9 @@
                     </div>
 
                 </div>
+
                 <div class="viagens">
+                    <h2>VIAGENS</h2>
                     <div class="pesquisa-viagens">
                         <input type="text" placeholder="Destino da viagem">
                         <button class="gerenciar-viagens-btn" onclick="">Gerenciar Viagens</button>
