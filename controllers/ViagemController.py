@@ -11,7 +11,9 @@ clienteRepository = ClienteRepository()
 
 @viagem_controller.route('/')
 def index():
-    return render_template('teste.html')
+    i = 1
+    assentos = 46
+    return render_template('teste.html', i=i, assentos=assentos)
 
 #    min_price = request.args.get('min_price', 0, type=int)
 #    max_price = request.args.get('max_price', float('inf'), type=int)
