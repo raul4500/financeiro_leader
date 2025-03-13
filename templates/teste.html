@@ -29,7 +29,7 @@
         }
 
         .space{
-            background-color: red;
+            background-color: rgb(255, 255, 255);
             border: none;
             width: 8px;
         }
@@ -41,18 +41,26 @@
     <h1>Minha Tabela</h1>
     <table id="mapa-onibus" class="mapa-onibus">
         <tbody>
+            {% for i in range (1, 46, 4) %}
             <tr>
-                <td class="assento">o</td>
-                <td class="assento">o</td>
+                <td class="assento">{{ i }}</td>
+                <td class="assento">{{ i+1 }}</td>
                 <td class="nome">o</td>
                 <td class="nome">o</td>
                 <td class="space"></td>
-                <td class="assento">o</td>
-                <td class="assento">o</td>
+                {% if i==45 %}
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                {% else %}
+                <td class="assento">{{ i+3 }}</td>
+                <td class="assento">{{ i+2 }}</td>
                 <td class="nome">o</td>
                 <td class="nome">o</td>
+                {% endif %}
             </tr>
-            
+            {% endfor %}
         </tbody>
     </table>
 
