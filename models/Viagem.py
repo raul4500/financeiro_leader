@@ -13,7 +13,7 @@ class Viagem(db.Model):
     descricao = db.Column(db.String(400), nullable=False)
     inclusos = db.Column(db.String(400), nullable=False)
     # Relacionamento: Uma viagem pode ter várias reservas
-    reservas = db.relationship('Reserva', backref='viagem', lazy=True)
+    #reservas = db.relationship('Reserva', backref='viagem', lazy=True)
 
     def __repr__(self):
         return f"<Viagem {self.destino}>"
@@ -29,5 +29,5 @@ class Viagem(db.Model):
             "assentos_indisponiveis": self.assentos_indisponiveis,
             "descricao": self.descricao,
             "inclusos": self.inclusos,
-            "reservas": [reserva.toJson() for reserva in self.reservas]
+            #"reservas": [reserva.toJson() for reserva in self.reservas]
         }

@@ -8,10 +8,6 @@ class PassageiroDao:
         return Passageiro.query.get(id)
     
     @staticmethod
-    def getPassageiroByEmail(email):
-        return Passageiro.query.filter_by(email=email).first()
-    
-    @staticmethod
     def getPassageiroByRg(rg):
         return Passageiro.query.filter_by(rg=rg).first()
 
@@ -20,18 +16,17 @@ class PassageiroDao:
         return Passageiro.query.all()
 
     @staticmethod
-    def addPassageiro(nome, email, nascimento, rg, telefone):
-        Passageiro = Passageiro(nome=nome, email=email, nascimento=nascimento, rg=rg, telefone=telefone)
-        db.session.add(Passageiro)
+    def addPassageiro(nome, nascimento, rg, telefone):
+        passageiro = Passageiro(nome=nome, nascimento=nascimento, rg=rg, telefone=telefone)
+        db.session.add(passageiro)
         db.session.commit()
-        return Passageiro.toJson()
+        return passageiro.toJson()
 
     @staticmethod
-    def attPassageiro(email, nome, novo_email, nascimento, rg, telefone):
-        Passageiro = PassageiroDao.getPassageiroByEmail(email)
+    def attPassageiro(nome, nascimento, rg, telefone):
+        Passageiro = PassageiroDao.getPassageiroByRg(rg)
         if Passageiro:
             Passageiro.nome = nome
-            Passageiro.email = novo_email
             Passageiro.nascimento = nascimento
             Passageiro.rg = rg
             Passageiro.telefone = telefone

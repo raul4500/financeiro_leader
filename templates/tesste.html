@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabela para PDF</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar-main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/mapa-onibus.css') }}">
+    <style>
+                .sidebar-right {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100%;
+            background-color: #f4f4f4;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            transition: right 0.3s ease;
+            padding: 16px 0 0 0;
+            overflow: hidden;
+        }
+        .sidebar-right.active {
+          padding: 16px; 
+          right: 0;
+        }
+        .toggle-btn-right {
+            position: fixed;
+            top: 20px;
+            right: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .search-box {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .clients-table {
+            width: 100%;
+            height: 300px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        .seat-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 400px;
+            margin: 50px auto;
+            gap: 10px;
+        }
+        .seat {
+            width: 80px;
+            height: 80px;
+            background-color: lightgray;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid #333;
+        }
+        .drag-item {
+            cursor: grab;
+            padding: 5px;
+            background-color: #ddd;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main">
+
+        <div class="sidebar">
+            <a href="/">
+                <div class="sidebar-item"><i class="bi bi-house-fill"></i></div>
+            </a>
+            <a href="/passageiros">
+                <div class="sidebar-item"><i class="bi bi-person-fill"></i></div>
+            </a>
+            <a href="/viagens">
+                <div class="sidebar-item"><i class="bi bi-airplane-fill"></i></div>
+            </a>
+            <a href="" class="bell">
+                <div class="sidebar-item"><i class="bi bi-bell-fill"></i></div>
+            </a>
+        </div>
+
+        <div class="sidebar-right" id="sidebarRight" onclick="event.stopPropagation()">
+        <h2>Clientes</h2>
+        <input type="text" class="search-box" id="searchInput" onkeyup="searchClient()" placeholder="Buscar nome...">
+        <div class="clients-table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                    </tr>
+                </thead>
+                <tbody id="clientTableBody">
+                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>1</td><td>Ana Souza</td></tr>
+                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>2</td><td>Bruno Lima</td></tr>
+                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>3</td><td>Carlos Mendes</td></tr>
+                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>4</td><td>Daniela Rocha</td></tr>
+                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>5</td><td>Eduardo Farias</td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+        <div class="container">
+
+            <div class="header">
+                <div class="block">
+                <i class="bi bi-border-all"></i>
+                <p>Mapa</p>
+            </div>
+            <div class="block">
+                <i class="bi bi-table"></i>
+                <p>Dados</p>
+            </div>
+            </div>
+            <button class="toggle-btn-right" onclick="toggleSidebar(event)">☰</button>
+
+            <table id="mapa-onibus" class="mapa-onibus">
+                <tbody>
+                    <tr>
+                        <td colspan="7" style="height: 50px; font-size: 2.5vw;">
+                            <center>
+                                <h3>APARECIDA DO NORTE</h3>
+                            </center>
+                        </td>
+                        <td colspan="2" style="background-color: rgb(115, 187, 67);">
+                            <center>
+                                <h2>Saída: 20/12/2025</h2>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">
+                            <center>
+                                <h2>Mapa de Assentos</h2>
+                            </center>
+                        </td>
+                        <td colspan="2" style="background-color: rgb(115, 187, 67);">
+                            <center>
+                                <h2>Dezembro</h2>
+                            </center>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="7">
+                            <h2 style="text-align: right; color: red;">R$ {preco}</h2>
+                        </td>
+                        <td colspan="2">
+                            <p style="font-size: 14px; color: red;">(PARA MEMBROS DO GRUPO)</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="9">
+                            <center>
+                                <h2 style="font-size: 16px; color: red;">OU 6X DE R$ {VALOR.PARCELADO}</h2>
+                            </center>
+                        </td>
+                    </tr>
+
+                    {% set count = 0 %}
+                    {% if assentos == 49 or assentos > 49 and count == 0 %}
+                    <tr class="piso">
+                        <td colspan="9">Piso Superior</td>
+                    </tr>
+                    {% endif %}
+                    {% for i in range(1, assentos + 1, 4) %}
+                    {% if i == 49 and count == 0 %}
+                    <tr class="piso">
+                        <td colspan="9">Piso Inferior</td>
+                    </tr>
+                    {% set count = 1 %}
+                    {% endif %}
+                    <tr>
+                        {% if i % 2 != 0 %}
+                        {% if i == assentos %}
+                        <td class="assento" id="assento_{{ i }}" style="opacity: 0; border: none"></td>
+                        <td class="assento" id="assento_{{ i }}">{{ i }}</td>
+                        <td class="nome" onclick="highlightSeat('{{ i }}')">O</td>
+                        <td class="nome" style="opacity: 0; border: none"></td>
+                        {% elif i + 1 == assentos %}
+                        <td class="assento" id="assento_{{ i }}">{{ i }}</td>
+                        <td class="assento" id="assento_{{ i + 1 }}">{{ i + 1 }}</td>
+                        <td class="nome" onclick="highlightSeat('{{ i }}')">O</td>
+                        <td class="nome" onclick="highlightSeat('{{ i + 1 }}')">o</td>
+                        {% elif i + 2 == assentos %}
+                        <td class="assento" id="assento_{{ i }}">{{ i }}</td>
+                        <td class="assento" id="assento_{{ i + 1 }}">{{ i + 1 }}</td>
+                        <td class="nome" onclick="highlightSeat('{{ i }}')">O</td>
+                        <td class="nome" onclick="highlightSeat('{{ i + 1 }}')">o</td>
+                        <td class="space"></td>
+                        <td class="assento" id="assento_{{ i }}" style="opacity: 0; border: none"></td>
+                        <td class="assento" id="assento_{{ i + 2 }}">{{ i + 2 }}</td>
+                        <td class="nome" onclick="highlightSeat('{{ i + 2 }}')">o</td>
+                        <td class="nome" style="opacity: 0; border: none"></td>
+                        {% else %}
+                        <td class="assento" id="assento_{{ i }}">{{ i }}</td>
+                        <td class="assento" id="assento_{{ i + 1 }}">{{ i + 1 }}</td>
+                        <td class="nome" onclick="highlightSeat('{{ i }}')">O</td>
+                        <td class="nome" onclick="highlightSeat('{{ i + 1 }}')">o</td>
+                        <td class="space"></td>
+                        <td class="assento" id="assento_{{ i + 3 }}">{{ i + 3 }}</td>
+                        <td class="assento" id="assento_{{ i + 2 }}">{{ i + 2 }}</td>
+                        <td class="nome" onclick="highlightSeat('{{ i + 3 }}')">o</td>
+                        <td class="nome" onclick="highlightSeat('{{ i + 2 }}')">o</td>
+                        {% endif %}
+                        {% endif %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <button id="baixar">Baixar PDF</button>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+
+    <script>
+        document.getElementById("baixar").onclick = function () {
+            const tabela = document.getElementById("tabela");
+
+            // Configuração do HTML2PDF para gerar o PDF
+            const opt = {
+                margin: 1,
+                filename: 'tabela.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Gerar o PDF a partir da tabela mantendo os estilos
+            html2pdf().from(tabela).set(opt).save();
+        };
+
+        function toggleSidebar(event) {
+            let sidebar = document.getElementById("sidebarRight");
+            sidebar.classList.toggle("active");
+            event.stopPropagation();
+            
+            if (sidebar.classList.contains("active")) {
+                document.addEventListener("click", closeSidebar);
+            } else {
+                document.removeEventListener("click", closeSidebar);
+            }
+        }
+        
+        function closeSidebar(event) {
+            let sidebar = document.getElementById("sidebarRight");
+            if (!sidebar.contains(event.target)) {
+                sidebar.classList.remove("active");
+                document.removeEventListener("click", closeSidebar);
+            }
+        }
+        
+        function searchClient() {
+            let input = document.getElementById("searchInput").value.toLowerCase();
+            let rows = document.querySelectorAll("#clientTableBody tr");
+            
+            rows.forEach(row => {
+                let name = row.cells[1].textContent.toLowerCase();
+                row.style.display = name.includes(input) ? "" : "none";
+            });
+        }
+        
+
+        function highlightSeat(seatId) {
+            // Primeiro, removemos a classe 'selected' de todas as células e botões
+            const allButtons = document.querySelectorAll('.nome');
+            const allSeats = document.querySelectorAll('.assento');
+
+            allButtons.forEach(button => button.classList.remove('selected'));
+            allSeats.forEach(seat => seat.classList.remove('selected'));
+
+            // Adicionamos a classe 'selected' ao botão clicado e à célula de assento correspondente
+            const button = document.querySelector(`button[onclick="highlightSeat(${seatId})"]`);
+            const seat = document.getElementById(`assento_${seatId}`);
+
+            if (button) {
+                button.classList.add('selected');
+            }
+            if (seat) {
+                seat.classList.add('selected');
+            }
+        }
+    </script>
+</body>
+
+</html>

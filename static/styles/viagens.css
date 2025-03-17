@@ -1,0 +1,115 @@
+body {
+    height: 50vh;
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1 {
+    margin: 0px;
+    padding: 0px;
+}
+
+.viagens {
+    height: fit-content;
+    width: auto;
+    padding: 16px;
+    margin: 0px;
+}
+
+.opcoes-viagens {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(163, 163, 163);
+    padding: 16px 0 16px 0;
+}
+
+.opcoes-viagens input {
+    width: 60%;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgb(117, 117, 117);
+    padding: 10px;
+}
+
+.opcoes-viagens button {
+    width: 30%;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid rgb(117, 117, 117);
+    padding: 10px;
+    word-wrap: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.opcoes-viagens button.adicionar-passageiro {
+    cursor: pointer;
+    background-color: rgb(186, 255, 203);
+    color: rgb(0, 0, 0);
+    border: 1px solid green;
+}
+
+.opcoes-viagens button.adicionar-passageiro:hover {
+    background-color: rgb(38, 139, 64);
+    color: white;
+}
+
+.tabela-viagens {
+    height: fit-content;
+    max-width: 100%;
+    white-space: nowrap;
+    padding: 0px;
+}
+
+.tabela-viagens table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid rgb(163, 163, 163);
+}
+
+.tabela-viagens th {
+    border-bottom: 1px solid rgb(163, 163, 163);
+    font-weight: normal;
+    background-color: rgb(241, 241, 241);
+    padding: 10px 0px 10px 8px;
+    text-align: left;
+}
+
+.tabela-viagens td {
+    border-bottom: 1px solid rgb(163, 163, 163);
+    padding: 10px 0px 10px 8px;
+    text-align: left;
+}
+
+.tabela-viagens tr a{
+    color: rgb(0, 18, 32);
+    text-decoration: none;
+}   
+
+.tabela-viagens tr:hover{
+    color: rgb(0, 18, 32);
+    background-color: rgb(241, 241, 241);
+    text-decoration: underline;
+}
+
+.tabela-viagens td button {
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+.tabela-viagens td button:hover {
+    background-color: rgb(214, 214, 214);
+
+}
+
+.tabela-viagens td .nome {
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,350 @@
+body {
+    background-color: white;
+    font-family: Arial, sans-serif;
+    margin: 0%;
+    padding: 0%;
+    width: 100%;
+}
+
+h2 {
+    margin: 16px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+
+::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+    background: #F4F4F4;
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background: rgb(146, 146, 146);
+}
+
+.caixa-de-lembretes {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(240, 240, 240);
+    height: 230px;
+    padding: 0px;
+    margin: 10px;
+    border-top-left-radius: 16px;
+    border-bottom-left-radius: 16px;
+    box-shadow: 0px 4px 19px rgba(0, 0, 0, .5);
+}
+
+.caixa-de-lembretes .left {
+    width: 30%;
+    border-right: 2px solid rgb(117, 117, 117);
+}
+
+.caixa-de-lembretes .left textarea {
+    padding: 4px;
+    border: 1px solid grey;
+    font-family: Arial;
+    border-radius: 8px;
+    resize: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 100px;
+}
+
+.caixa-de-lembretes .left .adicionar-lembrete {
+    cursor: pointer;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 92%;
+    height: 40px;
+    border-radius: 8px;
+    padding: 10px;
+    word-wrap: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    background-color: rgb(186, 255, 203);
+    color: rgb(0, 0, 0);
+    border: 1px solid green;
+}
+
+.caixa-de-lembretes .left .adicionar-lembrete:hover {
+    background-color: rgb(38, 139, 64);
+    color: white;
+}
+
+.caixa-de-lembretes .right {
+    width: 70%;
+    overflow-y: scroll;
+}
+
+.caixa-de-lembretes .right .lembrete {
+    border: 1px solid rgb(148, 148, 148);
+    background-color: rgb(211, 211, 211);
+    width: fit-content;
+    border-radius: 50px;
+    margin: 8px;
+    padding: 0px 8px 0px 8px;
+}
+
+.caixa-de-lembretes .right .lembrete:hover {
+    background-color: rgb(235, 225, 217);
+}
+
+.caixa-de-lembretes .right .lembrete button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.caixa-de-lembretes .right .lembrete p {
+    margin: 4px;
+    padding: 0px;
+}
+
+.content {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.passageiros {
+    height: auto;
+    width: 50%;
+    padding: 0;
+    margin: 10px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 19px rgba(0, 0, 0, .5);
+}
+
+.opcoes-passageiros {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(163, 163, 163);
+    padding: 10px;
+}
+
+.opcoes-passageiros input {
+    width: 60%;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgb(117, 117, 117);
+    padding: 10px;
+}
+
+.opcoes-passageiros button {
+    width: 35%;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid rgb(117, 117, 117);
+    padding: 10px;
+    word-wrap: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.opcoes-passageiros button.adicionar-passageiro {
+    cursor: pointer;
+    background-color: rgb(186, 255, 203);
+    color: rgb(0, 0, 0);
+    border: 1px solid green;
+}
+
+.opcoes-passageiros button.adicionar-passageiro:hover {
+    background-color: rgb(38, 139, 64);
+    color: white;
+}
+
+.opcoes-passageiros .adicionar-passageiro i {
+    line-height: 10px;
+    font-size: 30px;
+}
+
+.opcoes-passageiros button:hover {
+    background-color: rgb(117, 117, 117);
+    color: white;
+}
+
+.tabela-passageiros {
+    height: 280px;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow-y: scroll;
+    padding: 0px;
+}
+
+.tabela-passageiros table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.tabela-passageiros th {
+    border-bottom: 1px solid rgb(163, 163, 163);
+    font-weight: normal;
+    background-color: rgb(241, 241, 241);
+    padding: 10px 0px 10px 8px;
+    text-align: left;
+}
+
+.tabela-passageiros td {
+    border-bottom: 1px solid rgb(163, 163, 163);
+    padding: 10px 0px 10px 8px;
+    text-align: left;
+}
+
+.tabela-passageiros td button {
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+}
+
+.tabela-passageiros td button:hover {
+    background-color: rgb(214, 214, 214);
+}
+
+.tabela-passageiros td .nome {
+    max-width: 250px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.todos-passageiros button {
+    cursor: pointer;
+    position: relative;
+    top: 16px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: 35%;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid rgb(117, 117, 117);
+    padding: 10px;
+    word-wrap: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.todos-passageiros button:hover {
+    background-color: rgb(117, 117, 117);
+    color: white;
+}
+
+.viagens {
+    height: 100%;
+    width: 50%;
+    padding: 0;
+    margin: 10px;
+    height: fit-content;
+    border-top-left-radius: 16px;
+    border-top-right-radius: 16px;
+    box-shadow: 0px 4px 19px rgba(0, 0, 0, .5);
+}
+
+.pesquisa-viagens {
+    width: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border-bottom: 1px solid rgb(163, 163, 163);
+    padding: 10px;
+}
+
+.pesquisa-viagens input {
+    width: 60%;
+    height: 30px;
+    border-radius: 8px;
+    border: 1px solid rgb(117, 117, 117);
+    padding: 10px;
+}
+
+
+.gerenciar-viagens-btn {
+    cursor: pointer;
+    width: 35%;
+    height: 50px;
+    border-radius: 8px;
+    border: 1px solid rgb(117, 117, 117);
+    padding: 10px;
+    word-wrap: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.gerenciar-viagens-btn:hover {
+    background-color: rgb(117, 117, 117);
+    color: white;
+}
+
+.viagens-blocks {
+    height: 329px;
+    overflow-y: scroll;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30%, 1fr));
+    gap: 16px;
+    padding: 16px;
+}
+
+.viagens-blocks a{
+    text-decoration: none;
+    color: black;
+}
+
+.block {
+    background-color: #ebebeb;
+    height: fit-content;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, .5);
+    cursor: pointer;
+}
+
+.block:hover {
+    background-color: #9b9b9b;
+}
+
+@media(max-width: 1200px) {
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .passageiros {
+        width: auto;
+        height: 500px;
+    }
+
+    .viagens {
+        width: auto;
+    }
+}
+
+@media(max-width: 700px) {
+
+
+    .caixa-de-lembretes {
+        display: none;
+    }
+
+    .content {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .passageiros {
+        width: auto;
+        height: 500px;
+    }
+
+    .viagens {
+        width: auto;
+    }
+}

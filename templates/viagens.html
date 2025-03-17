@@ -5,148 +5,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="../static/styles/sidebar-main.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar-main.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/viagens.css') }}">
     <title>Passageiros</title>
 </head>
-
-<style>
-    body {
-        height: 50vh;
-        margin: 0;
-        padding: 0;
-        font-family: 'Roboto', sans-serif;
-    }
-
-    h1 {
-        margin: 0px;
-        padding: 0px;
-    }
-
-    .viagens {
-        height: fit-content;
-        width: auto;
-        padding: 16px;
-        margin: 0px;
-    }
-
-    .opcoes-viagens {
-        width: auto;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        border-bottom: 1px solid rgb(163, 163, 163);
-        padding: 16px 0 16px 0;
-    }
-
-    .opcoes-viagens input {
-        width: 60%;
-        height: 30px;
-        border-radius: 8px;
-        border: 1px solid rgb(117, 117, 117);
-        padding: 10px;
-    }
-
-    .opcoes-viagens button {
-        width: 30%;
-        height: 50px;
-        border-radius: 8px;
-        border: 1px solid rgb(117, 117, 117);
-        padding: 10px;
-        word-wrap: none;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-    .opcoes-viagens button.adicionar-passageiro {
-        cursor: pointer;
-        background-color: rgb(186, 255, 203);
-        color: rgb(0, 0, 0);
-        border: 1px solid green;
-    }
-
-    .opcoes-viagens button.adicionar-passageiro:hover {
-        background-color: rgb(38, 139, 64);
-        color: white;
-    }
-
-    .tabela-viagens {
-        height: fit-content;
-        max-width: 100%;
-        white-space: nowrap;
-        padding: 0px;
-    }
-
-    .tabela-viagens table {
-        width: 100%;
-        border-collapse: collapse;
-        border: 1px solid rgb(163, 163, 163);
-    }
-
-    .tabela-viagens th {
-        border-bottom: 1px solid rgb(163, 163, 163);
-        font-weight: normal;
-        background-color: rgb(241, 241, 241);
-        padding: 10px 0px 10px 8px;
-        text-align: left;
-    }
-
-    .tabela-viagens td {
-        border-bottom: 1px solid rgb(163, 163, 163);
-        padding: 10px 0px 10px 8px;
-        text-align: left;
-    }
-
-    .tabela-viagens tr a{
-        color: rgb(0, 18, 32);
-        text-decoration: none;
-    }   
-
-    .tabela-viagens tr:hover{
-        color: rgb(0, 18, 32);
-        background-color: rgb(241, 241, 241);
-        text-decoration: underline;
-    }
-
-    .tabela-viagens td button {
-        padding: 8px;
-        border-radius: 4px;
-        cursor: pointer;
-        border: none;
-        background: none;
-    }
-
-    .tabela-viagens td button:hover {
-        background-color: rgb(214, 214, 214);
-
-    }
-
-    .tabela-viagens td .nome {
-        max-width: 250px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-    }
-
-
-</style>
 
 <body>
     <div class="main">
         <div class="sidebar">
-            <div class="sidebar">
-                <a href="index.html">
-                    <div class="sidebar-item"><i class="bi bi-house-fill"></i></div>
-                </a>
-                <a href="passageiros.html">
-                    <div class="sidebar-item"><i class="bi bi-person-fill"></i></div>
-                </a>
-                <a href="">
-                    <div class="sidebar-item"><i class="bi bi-airplane-fill"></i></div>
-                </a>
-                <a href="">
-                    <div class="sidebar-item"><i class="bi bi-bell-fill"></i></div>
-                </a>
-            </div>
+            <a href="/">
+                <div class="sidebar-item"><i class="bi bi-house-fill"></i></div>
+            </a>
+            <a href="/passageiros">
+                <div class="sidebar-item"><i class="bi bi-person-fill"></i></div>
+            </a>
+            <a href="/viagens">
+                <div class="sidebar-item"><i class="bi bi-airplane-fill"></i></div>
+            </a>
+            <a href="" class="bell">
+                <div class="sidebar-item"><i class="bi bi-bell-fill"></i></div>
+            </a>
         </div>
+
         <div class="container">
 
             <div class="viagens">
@@ -165,61 +45,19 @@
                             <th></th>
                             <th></th>
                         </tr>
-                        <tr onclick="window.location.href='teste.html';">
-                        <td>
-                            <i class='bi bi-bus-front-fill'></i>
-                          </td>
-                          <td>
-                            <div class="nome"><a href="/viagem/{{ v.id }}">16/03 - Monte Verde</a></div>
-                          </td>
-                          <td><button><i class="bi bi-pencil-fill"></i></button></td>
-                          <td></td>
-                        </tr>
-                        <tr>
-                            
-                            <td>
-                                <i class='bi bi-bus-front-fill'></i>
-                            </td>
-                            <td>
-                                <div class="nome">16/03 - Monte Verde</div>
-                            </td>
-                            <td><button><i class="bi bi-pencil-fill"></i></button></td>
-                            <td></td>
-                            
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class='bi bi-bus-front-fill'></i>
-                            </td>
-                            <td>
-                                <div class="nome">16/03 - Monte Verde</div>
-                            </td>
-                            <td><button><i class="bi bi-pencil-fill"></i></button></td>
-                            <td></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <i class='bi bi-bus-front-fill'></i>
-                            </td>
-                            <td>
-                                <div class="nome">16/03 - Monte Verde</div>
-                            </td>
-                            <td><button><i class="bi bi-pencil-fill"></i></button></td>
-                            <td></td>
-                        </tr>
 
-        <!--{% for v in viagens %}
-        <tr onclick="window.location.href='/viagem/{{ v.id }}';">
-                        <td>
-                            <i class='bi bi-bus-front-fill'></i>
-                          </td>
-                          <td>
-                            <div class="nome"><a href="/viagem/{{ v.id }}">16/03 - Monte Verde</a></div>
-                          </td>
-                          <td><button><i class="bi bi-pencil-fill"></i></button></td>
-                          <td></td>
+                        {% for v in viagens %}
+                        <tr onclick="window.location.href='/viagem/{{ v.id }}';">
+                            <td>
+                                <i class='bi bi-bus-front-fill'></i>
+                            </td>
+                            <td>
+                                <div class="nome"><a href="/viagem/{{ v.id }}">16/03 - Monte Verde</a></div>
+                            </td>
+                            <td><button><i class="bi bi-pencil-fill"></i></button></td>
+                            <td></td>
                         </tr>
-        {% endfor %}-->
+                        {% endfor %}
                     </table>
                 </div>
 
