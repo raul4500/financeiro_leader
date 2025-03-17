@@ -10,7 +10,6 @@ class Viagem(db.Model):
     preco = db.Column(db.Float, nullable=False)
     qtd_assentos = db.Column(db.Integer, nullable=False)
     assentos_indisponiveis = db.Column(db.Integer, nullable=True)
-    imagem_url = db.Column(db.String(100), nullable=True)
     descricao = db.Column(db.String(400), nullable=False)
     inclusos = db.Column(db.String(400), nullable=False)
     # Relacionamento: Uma viagem pode ter várias reservas
@@ -28,7 +27,6 @@ class Viagem(db.Model):
             "preco": self.preco,
             "qtd_assentos": self.qtd_assentos,
             "assentos_indisponiveis": self.assentos_indisponiveis,
-            "imagem_url": self.imagem_url,
             "descricao": self.descricao,
             "inclusos": self.inclusos,
             "reservas": [reserva.toJson() for reserva in self.reservas]

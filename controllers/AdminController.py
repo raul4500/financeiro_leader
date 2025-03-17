@@ -8,7 +8,7 @@ admin_controller = Blueprint('admin_controller', __name__)
 
 adminRepository = AdminRepository()
 viagemRepository = ViagemRepository()
-clienteRepository = ClienteRepository()
+clienteRepository = PassageiroRepository()
 
 @admin_controller.route('/gerenciar', methods=['GET'])
 def index():

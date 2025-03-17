@@ -7,13 +7,13 @@ from datetime import*
 viagem_controller = Blueprint('viagem_controller', __name__)
 
 viagemRepository = ViagemRepository()
-clienteRepository = ClienteRepository()
+clienteRepository = PassageiroRepository()
 
-@viagem_controller.route('/')
+@viagem_controller.route('/viagens')
 def index():
     i = 1
     assentos = 68
-    return render_template('teste.html', i=i, assentos=assentos)
+    return render_template('viagens.html')
 
 #    min_price = request.args.get('min_price', 0, type=int)
 #    max_price = request.args.get('max_price', float('inf'), type=int)

@@ -4,7 +4,7 @@ from controllers.__init__ import *
 
 app = Flask(__name__)
 app.register_blueprint(viagem_controller)
-#app.register_blueprint(pagamento_controller)
+app.register_blueprint(index_controller)
 #app.register_blueprint(cliente_controller)
 #app.register_blueprint(admin_controller)
 #app.register_blueprint(reserva_controller)
