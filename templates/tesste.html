@@ -9,7 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/sidebar-main.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles/mapa-onibus.css') }}">
     <style>
-                .sidebar-right {
+        .sidebar-right {
             position: fixed;
             top: 0;
             right: -300px;
@@ -29,7 +29,7 @@
             position: fixed;
             top: 20px;
             right: 10px;
-            background-color: #007bff;
+            background-color: #ff0000;
             color: white;
             border: none;
             padding: 10px 15px;
@@ -119,11 +119,9 @@
                     </tr>
                 </thead>
                 <tbody id="clientTableBody">
-                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>1</td><td>Ana Souza</td></tr>
-                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>2</td><td>Bruno Lima</td></tr>
-                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>3</td><td>Carlos Mendes</td></tr>
-                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>4</td><td>Daniela Rocha</td></tr>
-                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>5</td><td>Eduardo Farias</td></tr>
+                    {% for p in passageiros %}
+                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>{{ p.id }}</td><td>{{ p.nome }}</td></tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>
@@ -204,33 +202,33 @@
                         {% if i == assentos %}
                         <td class="assento" id="assento_{{ i }}" style="opacity: 0; border: none"></td>
                         <td class="assento" id="assento_{{ i }}">{{ i }}</td>
-                        <td class="nome" onclick="highlightSeat('{{ i }}')">O</td>
-                        <td class="nome" style="opacity: 0; border: none"></td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" style="opacity: 0; border: none"></td>
                         {% elif i + 1 == assentos %}
                         <td class="assento" id="assento_{{ i }}">{{ i }}</td>
                         <td class="assento" id="assento_{{ i + 1 }}">{{ i + 1 }}</td>
-                        <td class="nome" onclick="highlightSeat('{{ i }}')">O</td>
-                        <td class="nome" onclick="highlightSeat('{{ i + 1 }}')">o</td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i+1 }}" name="assento_{{ i+1 }}" onclick="highlightSeat('{{ i + 1 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
                         {% elif i + 2 == assentos %}
                         <td class="assento" id="assento_{{ i }}">{{ i }}</td>
                         <td class="assento" id="assento_{{ i + 1 }}">{{ i + 1 }}</td>
-                        <td class="nome" onclick="highlightSeat('{{ i }}')">O</td>
-                        <td class="nome" onclick="highlightSeat('{{ i + 1 }}')">o</td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i + 1 }}" name="assento_{{ i + 1 }}" onclick="highlightSeat('{{ i + 1 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
                         <td class="space"></td>
                         <td class="assento" id="assento_{{ i }}" style="opacity: 0; border: none"></td>
                         <td class="assento" id="assento_{{ i + 2 }}">{{ i + 2 }}</td>
-                        <td class="nome" onclick="highlightSeat('{{ i + 2 }}')">o</td>
-                        <td class="nome" style="opacity: 0; border: none"></td>
+                        <td class="nome" id="assento_{{ i + 2 }}" name="assento_{{ i + 2 }}" onclick="highlightSeat('{{ i + 2 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" style="opacity: 0; border: none"></td>
                         {% else %}
                         <td class="assento" id="assento_{{ i }}">{{ i }}</td>
                         <td class="assento" id="assento_{{ i + 1 }}">{{ i + 1 }}</td>
-                        <td class="nome" onclick="highlightSeat('{{ i }}')">O</td>
-                        <td class="nome" onclick="highlightSeat('{{ i + 1 }}')">o</td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i + 1 }}" name="assento_{{ i + 1 }}" onclick="highlightSeat('{{ i + 1 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
                         <td class="space"></td>
                         <td class="assento" id="assento_{{ i + 3 }}">{{ i + 3 }}</td>
                         <td class="assento" id="assento_{{ i + 2 }}">{{ i + 2 }}</td>
-                        <td class="nome" onclick="highlightSeat('{{ i + 3 }}')">o</td>
-                        <td class="nome" onclick="highlightSeat('{{ i + 2 }}')">o</td>
+                        <td class="nome" id="assento_{{ i + 3 }}" name="assento_{{ i + 3 }}" onclick="highlightSeat('{{ i + 3 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i + 2 }}" name="assento_{{ i + 2 }}" onclick="highlightSeat('{{ i + 2 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
                         {% endif %}
                         {% endif %}
                     </tr>
@@ -300,7 +298,7 @@
             allSeats.forEach(seat => seat.classList.remove('selected'));
 
             // Adicionamos a classe 'selected' ao botão clicado e à célula de assento correspondente
-            const button = document.querySelector(`button[onclick="highlightSeat(${seatId})"]`);
+            const button = document.querySelector(`button[onclick="highlightSeat(${seatId })"]`);
             const seat = document.getElementById(`assento_${seatId}`);
 
             if (button) {
@@ -308,6 +306,22 @@
             }
             if (seat) {
                 seat.classList.add('selected');
+            }
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.innerText);
+        }
+        
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+        
+        function drop(event) {
+            event.preventDefault();
+            let name = event.dataTransfer.getData("text");
+            if (event.target.classList.contains("nome")) {
+                event.target.innerText = name;
             }
         }
     </script>

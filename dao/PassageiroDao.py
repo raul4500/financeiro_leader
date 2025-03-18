@@ -16,26 +16,35 @@ class PassageiroDao:
         return Passageiro.query.all()
 
     @staticmethod
-    def addPassageiro(nome, nascimento, rg, telefone):
-        passageiro = Passageiro(nome=nome, nascimento=nascimento, rg=rg, telefone=telefone)
+    def addPassageiro(nome, nascimento, rg, telefone, status):
+        passageiro = Passageiro(nome=nome, nascimento=nascimento, rg=rg, telefone=telefone, status=status)
         db.session.add(passageiro)
         db.session.commit()
         return passageiro.toJson()
 
     @staticmethod
-    def attPassageiro(nome, nascimento, rg, telefone):
-        Passageiro = PassageiroDao.getPassageiroByRg(rg)
-        if Passageiro:
-            Passageiro.nome = nome
-            Passageiro.nascimento = nascimento
-            Passageiro.rg = rg
-            Passageiro.telefone = telefone
+    def attPassageiro(nome, nascimento, rg, telefone, status):
+        passageiro = PassageiroDao.getPassageiroByRg(rg)
+        if passageiro:
+            passageiro.nome = nome
+            passageiro.nascimento = nascimento
+            passageiro.rg = rg
+            passageiro.telefone = telefone
+            passageiro.status = status
             db.session.commit()
-        return Passageiro.toJson()
+        return passageiro.toJson()
+
+    @staticmethod
+    def attStatus(rg, status):
+        passageiro = PassageiroDao.getPassageiroByRg(rg)
+        if passageiro:
+            passageiro.status = status
+            db.session.commit()
+        return passageiro.toJson()
 
     @staticmethod
     def delPassageiro(id):
-        Passageiro = PassageiroDao.getPassageiro(id)
-        if Passageiro:
-            db.session.delete(Passageiro)
+        passageiro = PassageiroDao.getPassageiro(id)
+        if passageiro:
+            db.session.delete(passageiro)
             db.session.commit()

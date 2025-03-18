@@ -22,7 +22,6 @@ h1 {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-bottom: 1px solid rgb(163, 163, 163);
     padding: 16px 0 16px 0;
 }
 
@@ -45,16 +44,40 @@ h1 {
     text-overflow: ellipsis;
 }
 
-.opcoes-viagens button.adicionar-passageiro {
+.opcoes-viagens button.adicionar {
     cursor: pointer;
     background-color: rgb(186, 255, 203);
     color: rgb(0, 0, 0);
     border: 1px solid green;
 }
 
-.opcoes-viagens button.adicionar-passageiro:hover {
+.opcoes-viagens button.adicionar:hover {
     background-color: rgb(38, 139, 64);
     color: white;
+}
+
+.adicionar-viagem{
+    height: 0px;
+    border-radius: 8px;
+    background-color: rgb(227, 255, 227);
+    margin-bottom: 16px;
+    padding: 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow: hidden;
+}
+
+.adicionar-viagem.active{
+    height: auto;
+    padding: 12px;
+    border: 1px solid green;
+}
+
+.adicionar-viagem input{
+    border: 1px solid grey;
+    padding: 12px 8px 12px 8px;
+    border-radius: 8px;
 }
 
 .tabela-viagens {

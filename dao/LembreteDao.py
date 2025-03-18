@@ -25,7 +25,7 @@ class LembreteDao:
         return lembrete.toJson()
 
     @staticmethod
-    def dellembrete(id):
+    def delLembrete(id):
         lembrete = LembreteDao.getLembrete(id)
         if lembrete:
             db.session.delete(lembrete)

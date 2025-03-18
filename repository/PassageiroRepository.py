@@ -13,11 +13,14 @@ class PassageiroRepository:
     def getPassageiroByRg(self, rg):
         return self.passageiroDao.getPassageiroByRg(rg)
 
-    def createPassageiro(self, nome, nascimento, rg, telefone):
-        return self.passageiroDao.addPassageiro(nome, nascimento, rg, telefone)
+    def createPassageiro(self, nome, nascimento, rg, telefone, status):
+        return self.passageiroDao.addPassageiro(nome, nascimento, rg, telefone, status)
 
-    def updatePassageiro(self, nome, nascimento, rg, telefone):
-        return self.passageiroDao.attPassageiro(nome, nascimento, rg, telefone)
+    def updatePassageiro(self, nome, nascimento, rg, telefone, status):
+        return self.passageiroDao.attPassageiro(nome, nascimento, rg, telefone, status)
+    
+    def updateStatus(self, rg, status):
+        return self.passageiroDao.attStatus(rg, status)
 
     def deletePassageiro(self, id):
         return self.passageiroDao.delPassageiro(id)

@@ -4,3 +4,4 @@ from .PagamentoController import *
 from .AdminController import *
 from .ReservaController import *
 from .IndexController import *
+from .LembretesController import *

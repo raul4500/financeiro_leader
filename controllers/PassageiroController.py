@@ -89,7 +89,8 @@ def editarInfo(nome,nascimento, telefone):
 
 @passageiros_controller.route('/passageiros')
 def index():
-    return render_template('passageiros.html')
+    passageiros = passageiroRepository.getAllPassageiros()
+    return render_template('passageiros.html', passageiros=passageiros)
 
 @passageiros_controller.route('/cadastrar_passageiro', methods=['GET', 'POST'])
 def cadastrar_passageiro():
@@ -98,6 +99,7 @@ def cadastrar_passageiro():
         nascimento = request.form['nascimento']
         rg = request.form['rg']
         telefone = request.form['telefone']
+        status = request.form['status']
         # Convert nascimento to a date object
         try:
             nascimento = datetime.strptime(nascimento, '%Y-%m-%d').date()
@@ -112,15 +114,10 @@ def cadastrar_passageiro():
         
         if verificarInfo(nome, nascimento, rg, telefone):
             print('cehgeuei aq')
-            passageiroRepository.createPassageiro(nome, nascimento, rg, telefone)
+            passageiroRepository.createPassageiro(nome, nascimento, rg, telefone, status)
             print('passageiro registrado')
             return redirect(url_for('index_controller.index'))
     return redirect(url_for('index_controller.index'))
-
-@passageiros_controller.route('/mapa')
-def teste():
-    passageiros = passageiroRepository.getAllPassageiros()
-    return render_template('tesste.html', passageiros=passageiros, assentos=68)
 
 #@passageiros_controller.route('/login', methods=['GET', 'POST'])
 #def login():

@@ -8,12 +8,18 @@ viagens_controller = Blueprint('viagens_controller', __name__)
 
 viagemRepository = ViagemRepository()
 clienteRepository = PassageiroRepository()
+passageiroRepository = PassageiroRepository()
 
 @viagens_controller.route('/viagens')
 def index():
     viagens = viagemRepository.getAllViagens()
     assentos = 68
     return render_template('viagens.html', viagens=viagens)
+
+@viagens_controller.route('/mapa')
+def teste():
+    passageiros = passageiroRepository.getAllPassageiros()
+    return render_template('tesste.html', passageiros=passageiros, assentos=68)
 
 #    min_price = request.args.get('min_price', 0, type=int)
 #    max_price = request.args.get('max_price', float('inf'), type=int)

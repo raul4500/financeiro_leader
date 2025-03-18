@@ -32,47 +32,24 @@
 
         <div class="container">
             <div class="caixa-de-lembretes">
-                <form class="left" action="/" method="POST">
+                <form class="left" action="/add_lembrete" method="POST">
                     <h2>Lembretes</h2>
-                    <textarea name="adicionar-lembretes" placeholder="Adicione um lembrete..." id="adicionar-lembretes"
-                        required></textarea>
+                    <textarea name="mensagem" placeholder="Adicione um lembrete..." id="adicionar-lembretes" required></textarea>
                     <button type="submit" class="adicionar-lembrete">Adicionar lembrete</button>
                 </form>
                 <div class="right">
-        <!-- { for a in lembretes }
+         {% for a in lembretes %}
         <div class="lembrete">
-            <button onclick="abrirlembrete({a.id})"><p>{ a.mensagem }</p></button>
+            <p>{{ a.mensagem }}</p><button onclick="deleteLembrete('{{ a.id }}')"><i class="bi bi-trash-fill" style="color: red;"></i></button>
         </div>
-         { end for } -->
-
-                    <div class="lembrete">
-                        <button>
-                            <p>A passageira Maria nao a viagem</p>
-                        </button>
-                    </div>
-                    <div class="lembrete">
-                        <button>
-                            <p>A passageira Maria ja pagou</p>
-                        </button>
-                    </div>
-                    <div class="lembrete">
-                        <button>
-                            <p>desligar tudo</p>
-                        </button>
-                    </div>
-                    <div class="lembrete">
-                        <button>
-                            <p>A passageira Maria nao pagou a viagem</p>
-                        </button>
-                    </div>
-
+         {% endfor %}
                 </div>
             </div>
             <div class="content">
                 <div class="passageiros">
                     <h2>PASSAGEIROS</h2>
                     <div class="opcoes-passageiros">
-                        <input type="text" placeholder="Nome">
+                        <input type="text" id="searchInputNome" placeholder="Nome" onkeyup="searchClient('Nome', 1)">
                         <button class="adicionar-passageiro" id="openModalBtn">
                             <i class="bi bi-plus"></i>
                         </button>
@@ -87,21 +64,21 @@
                                 <th>Status</th>
                             </tr>
                 {% for p in passageiros %}
-                <tr>
+                <tbody id="clientTableBody">
                         <td>
                             <button><i class='bi bi-three-dots-vertical'></i></button>
                         </td>
                         <td><div class="nome">{{ p.nome }}</div></td>
                         <td>{{ p.telefone }}</td>
                         <td></td>
-                    </tr>
+                </tbody>
                 {% endfor %}
 
                         </table>
                     </div>
 
                     <div class="todos-passageiros">
-                        <button class="ver-todos-passageiros">Ver Todos</button>
+                        <button class="ver-todos-passageiros" onclick="window.location.href='/passageiros'">Ver Tudo</button>
                     </div>
 
                 </div>
@@ -141,12 +118,12 @@
                         <label for="telefone">Telefone:</label>
                         <input type="tel" id="telefone" name="telefone" maxlength="11" required placeholder="Digite o telefone">
 
-                        <!--<label for="status">Status:</label>
+                        <label for="status">Status:</label>
                         <select id="status" name="status" required>
                             <option value="ativo">Ativo</option>
                             <option value="inativo">Inativo</option>
                             <option value="pendente">Pendente</option>
-                        </select>-->
+                        </select>
                     </div>
                     <div class="modal-footer">
                         <button type="submit">Adicionar</button>
@@ -160,6 +137,21 @@
 </body>
 
 <script>
+
+function searchClient(i, cell) {
+    let input = document.getElementById(`searchInput${i}`).value.toLowerCase();
+    let rows = document.querySelectorAll("#clientTableBody tr");
+
+    rows.forEach(row => {
+      let name = row.cells[cell].textContent.toLowerCase();
+      row.style.display = name.includes(input) ? "" : "none";
+    });
+  }
+
+    function deleteLembrete(id){
+        window.location.href = `/deletar_lembrete/${id}`
+    }
+
     // Obtendo elementos
     const modal = document.getElementById("myModal");
     const openModalBtn = document.getElementById("openModalBtn");
