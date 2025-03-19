@@ -57,21 +57,22 @@ h1 {
 }
 
 .adicionar-viagem{
-    height: 0px;
+    height: 0;
     border-radius: 8px;
-    background-color: rgb(227, 255, 227);
+    background-color: rgba(225, 255, 225, 0.658);
     margin-bottom: 16px;
-    padding: 0px;
+    padding: 0 12px 0 12px;
     display: flex;
     flex-direction: column;
     gap: 12px;
     overflow: hidden;
+    transition: 1s;
 }
 
 .adicionar-viagem.active{
-    height: auto;
+    height: 370px;
     padding: 12px;
-    border: 1px solid green;
+    border: 1px solid rgb(39, 53, 25);
 }
 
 .adicionar-viagem input{

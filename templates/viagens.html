@@ -31,17 +31,20 @@
 
             <div class="viagens">
                 <h1>Viagens</h1>
-                <div class="opcoes-viagens">
+                <div class="opcoes-viagens" id="opcoes-viagens">
                     <input type="text" placeholder="Nome">
                     <button class="adicionar" id="adicionar" onclick="abrirInputs()"><i class="bi bi-plus" style="font-size: 16px;"></i>Adicionar Viagem</button>
                 </div>
 
-                <div class="adicionar-viagem">
-                    <label for="nome">Nome:</label>
-                    <input type="text" id="nome" name="nome" required placeholder="Digite o nome">
+                <div class="adicionar-viagem" id="adicionar-viagem">
+                    <label for="destino">destino:</label>
+                    <input type="text" id="destino" name="destino" required placeholder="Digite o nome">
 
-                    <label for="rg">RG:</label>
-                    <input type="text" id="rg" name="rg" maxlength="9" required placeholder="Digite o RG">
+                    <label for="data_inicio">data_inicio:</label>
+                    <input type="date" id="data_inicio" name="data_inicio" maxlength="9" required placeholder="Digite o data_inicio">
+
+                    <label for="data_fim">data_fim:</label>
+                    <input type="date" id="data_fim" name="data_fim" maxlength="9" required placeholder="Digite o data_fim">
 
                     <label for="nascimento">Data de Nascimento:</label>
                     <input type="date" id="nascimento" name="nascimento">
