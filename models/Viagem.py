@@ -9,6 +9,7 @@ class Viagem(db.Model):
     data_fim = db.Column(db.Date, nullable=False)
     preco = db.Column(db.Float, nullable=False)
     qtd_assentos = db.Column(db.Integer, nullable=False)
+    tipo_onibus = db.Column(db.String(12), nullable=False)
     assentos_indisponiveis = db.Column(db.Integer, nullable=True)
     descricao = db.Column(db.String(400), nullable=False)
     inclusos = db.Column(db.String(400), nullable=False)
@@ -26,6 +27,7 @@ class Viagem(db.Model):
             "data_fim": self.data_fim.strftime('%Y-%m-%d'),
             "preco": self.preco,
             "qtd_assentos": self.qtd_assentos,
+            "tipo_onibus": self.tipo_onibus,
             "assentos_indisponiveis": self.assentos_indisponiveis,
             "descricao": self.descricao,
             "inclusos": self.inclusos,

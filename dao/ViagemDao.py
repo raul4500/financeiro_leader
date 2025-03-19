@@ -29,14 +29,14 @@ class ViagemDao:
         ).all()
 
     @staticmethod
-    def addViagem(destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, imagem_url, descricao, inclusos):
-        viagem = Viagem(destino=destino, data_inicio=data_inicio, data_fim=data_fim, preco=preco, qtd_assentos=qtd_assentos, assentos_indisponiveis=assentos_indisponiveis, imagem_url=imagem_url, descricao=descricao, inclusos=inclusos)
+    def addViagem(destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, tipo_onibus, descricao, inclusos):
+        viagem = Viagem(destino=destino, data_inicio=data_inicio, data_fim=data_fim, preco=preco, qtd_assentos=qtd_assentos, assentos_indisponiveis=assentos_indisponiveis, tipo_onibus=tipo_onibus, descricao=descricao, inclusos=inclusos)
         db.session.add(viagem)
         db.session.commit()
         return viagem.toJson()
 
     @staticmethod
-    def attViagem(id, destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, imagem_url, descricao, inclusos):
+    def attViagem(id, destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, tipo_onibus, descricao, inclusos):
         viagem = ViagemDao.getViagem(id)
         if viagem:
             viagem.destino = destino
@@ -45,7 +45,7 @@ class ViagemDao:
             viagem.preco = preco
             viagem.aqt_assentos = qtd_assentos
             viagem.assentos_indisponiveis = assentos_indisponiveis
-            viagem.imagem_url = imagem_url
+            viagem.tipo_onibus = tipo_onibus
             viagem.descricao = descricao
             viagem.inclusos = inclusos
             db.session.commit()

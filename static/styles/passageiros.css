@@ -1,130 +1,160 @@
-body{
-    height: 100vh;
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-  }
+body {
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
 
-  h1 {
-    margin: 0px;
-    padding: 0px;
-  }
+h1 {
+  margin: 0px;
+  padding: 0px;
+}
 
 .passageiros {
-    height: fit-content;
-    width: auto;
-    padding: 16px;
-    margin: 0px;
-    box-shadow: 0px 4px 19px rgba(0, 0, 0, .5);
-  }
+  height: fit-content;
+  width: auto;
+  padding: 16px;
+  margin: 0px;
+  box-shadow: 0px 4px 19px rgba(0, 0, 0, .5);
+}
 
-  .opcoes-passageiros {
-    width: auto;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border-bottom: 1px solid rgb(163, 163, 163);
-    padding: 16px 0 16px 0;
-  }
+.opcoes-passageiros {
+  width: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border-bottom: 1px solid rgb(163, 163, 163);
+  padding: 16px 0 16px 0;
+}
 
-  .opcoes-passageiros input {
-    width: 60%;
-    height: 30px;
-    border-radius: 8px;
-    border: 1px solid rgb(117, 117, 117);
-    padding: 10px;
-  }
+.opcoes-passageiros input {
+  width: 60%;
+  height: 30px;
+  border-radius: 8px;
+  border: 1px solid rgb(117, 117, 117);
+  padding: 10px;
+}
 
-  .opcoes-passageiros button {
-    width: 30%;
-    height: 50px;
-    border-radius: 8px;
-    border: 1px solid rgb(117, 117, 117);
-    padding: 10px;
-    word-wrap: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.opcoes-passageiros button {
+  width: 30%;
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid rgb(117, 117, 117);
+  padding: 10px;
+  word-wrap: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  .opcoes-passageiros button.adicionar-passageiro {
-    cursor: pointer;
-    background-color: rgb(186, 255, 203);
-    color: rgb(0, 0, 0);
-    border: 1px solid green;
-  }
+.opcoes-passageiros button.adicionar-passageiro {
+  cursor: pointer;
+  background-color: rgb(186, 255, 203);
+  color: rgb(0, 0, 0);
+  border: 1px solid green;
+}
 
-  .opcoes-passageiros button.adicionar-passageiro:hover {
-    background-color: rgb(38, 139, 64);
-    color: white;
-  }
+.opcoes-passageiros button.adicionar-passageiro:hover {
+  background-color: rgb(38, 139, 64);
+  color: white;
+}
 
-  .opcoes-passageiros button:hover {
-    background-color: rgb(117, 117, 117);
-    color: white;
-  }
+.opcoes-passageiros button:hover {
+  background-color: rgb(117, 117, 117);
+  color: white;
+}
 
-  .tabela-passageiros {
-    height: fit-content;
-    max-width: 100%;
-    white-space: nowrap;
-    padding: 0px;
-  }
+.tabela-passageiros {
+  height: fit-content;
+  max-width: 100%;
+  white-space: nowrap;
+  padding: 0px;
+}
 
-  .tabela-passageiros table {
-    width: 100%;
-    border-collapse: collapse;
-    border: 1px solid rgb(163, 163, 163);
-  }
+.tabela-passageiros table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid rgb(163, 163, 163);
+}
 
-  .tabela-passageiros th {
-    border-bottom: 1px solid rgb(163, 163, 163);
-    font-weight: normal;
-    background-color: rgb(241, 241, 241);
-    padding: 10px 0px 10px 8px;
-    text-align: left;
-  }
+.tabela-passageiros th {
+  border-bottom: 1px solid rgb(163, 163, 163);
+  font-weight: normal;
+  background-color: rgb(241, 241, 241);
+  padding: 10px 0px 10px 8px;
+  text-align: left;
+}
 
-  .tabela-passageiros td {
-    border-bottom: 1px solid rgb(163, 163, 163);
-    padding: 10px 0px 10px 8px;
-    text-align: left;
-  }
+.tabela-passageiros td {
+  border-bottom: 1px solid rgb(163, 163, 163);
+  padding: 10px 0px 10px 8px;
+  text-align: left;
+}
 
-  .tabela-passageiros td button {
-    padding: 8px;
-    border-radius: 4px;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-  }
+.tabela-passageiros td button {
+  padding: 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
 
-  .tabela-passageiros td button:hover {
-    background-color: rgb(214, 214, 214);
-  }
+.tabela-passageiros td button:hover {
+  background-color: rgb(214, 214, 214);
+}
 
-  .tabela-passageiros td .nome {
-    max-width: 250px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.tabela-passageiros td .nome {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  .todos-passageiros button {
-    cursor: pointer;
-    position: relative;
-    top: 16px;
-    left: 50%;
-    transform: translate(-50%, 0);
-    width: 35%;
-    height: 50px;
-    border-radius: 8px;
-    border: 1px solid rgb(117, 117, 117);
-    padding: 10px;
-    word-wrap: none;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
+.todos-passageiros button {
+  cursor: pointer;
+  position: relative;
+  top: 16px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  width: 35%;
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid rgb(117, 117, 117);
+  padding: 10px;
+  word-wrap: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
 
-  .todos-passageiros button:hover {
-    background-color: rgb(117, 117, 117);
-    color: white;
-  }
+.todos-passageiros button:hover {
+  background-color: rgb(117, 117, 117);
+  color: white;
+}
+
+/* Estilo para o bloco de ações */
+.action-block {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+}
+
+.action-block ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.action-block ul li {
+  margin: 4px 0;
+}
+
+.action-block ul li a {
+  text-decoration: none;
+  color: black;
+}
+
+.action-block ul li a:hover {
+  color: blue;
+}

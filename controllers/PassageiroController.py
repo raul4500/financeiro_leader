@@ -7,7 +7,7 @@ import re
 from werkzeug.security import generate_password_hash, check_password_hash
 from datetime import *
 
-passageiros_controller = Blueprint('passageiros_controller', __name__)
+passageiro_controller = Blueprint('passageiro_controller', __name__)
 
 passageiroRepository = PassageiroRepository()
 
@@ -87,12 +87,12 @@ def editarInfo(nome,nascimento, telefone):
         return False
     return True
 
-@passageiros_controller.route('/passageiros')
+@passageiro_controller.route('/passageiros')
 def index():
     passageiros = passageiroRepository.getAllPassageiros()
     return render_template('passageiros.html', passageiros=passageiros)
 
-@passageiros_controller.route('/cadastrar_passageiro', methods=['GET', 'POST'])
+@passageiro_controller.route('/cadastrar_passageiro', methods=['GET', 'POST'])
 def cadastrar_passageiro():
     if request.method == 'POST':
         nome = request.form['nome']

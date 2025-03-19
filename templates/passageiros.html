@@ -22,6 +22,9 @@
       <a href="/viagens">
         <div class="sidebar-item"><i class="bi bi-airplane-fill"></i></div>
       </a>
+      <a href="">
+        <div class="sidebar-item"><i class="bi bi-credit-card-fill"></i></div>
+    </a>
       <a href="" class="bell">
         <div class="sidebar-item"><i class="bi bi-bell-fill"></i></div>
       </a>
@@ -54,9 +57,15 @@
               </tr>
               {% for p in passageiros %}
             <tbody id="clientTableBody">
-              <td>
-                <button><i class='bi bi-three-dots-vertical'></i></button>
-              </td>
+                <td>
+                  <button onclick="toggleBlock(this)"><i class='bi bi-three-dots-vertical'></i></button>
+                  <div class="action-block" style="display: none;">
+                    <ul>
+                      <li><a href="">Editar</a></li>
+                      <li><a href="">Excluir</a></li>
+                    </ul>
+                  </div>
+                </td>
               <td>
                 <div class="nome">{{ p.nome }}</div>
               </td>
@@ -87,6 +96,40 @@
       row.style.display = name.includes(input) ? "" : "none";
     });
   }
+</script>
+
+<script>
+  function toggleBlock(button) {
+    // Seleciona o bloco de ações relacionado ao botão clicado
+    const actionBlock = button.nextElementSibling;
+
+    // Fecha todos os outros blocos abertos
+    document.querySelectorAll('.action-block').forEach(block => {
+      if (block !== actionBlock) {
+        block.style.display = 'none';
+      }
+    });
+
+    // Alterna a exibição do bloco
+    if (actionBlock.style.display === 'none' || actionBlock.style.display === '') {
+      // Posiciona o bloco ao lado do botão
+      const rect = button.getBoundingClientRect();
+      actionBlock.style.display = 'block';
+      actionBlock.style.top = `${rect.top + window.scrollY}px`;
+      actionBlock.style.left = `${rect.right + 10}px`;
+    } else {
+      actionBlock.style.display = 'none';
+    }
+  }
+
+  // Fecha o bloco se clicar fora dele
+  document.addEventListener('click', function (event) {
+    if (!event.target.closest('td')) {
+      document.querySelectorAll('.action-block').forEach(block => {
+        block.style.display = 'none';
+      });
+    }
+  });
 </script>
 
 </html>

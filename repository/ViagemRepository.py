@@ -19,11 +19,11 @@ class ViagemRepository:
     def getViagemByDestinationAndMonth(self, destination, month):
         return self.viagemDao.getViagemByDestinationAndMonth(destination, month)
     
-    def createViagem(self, destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, imagem_url, descricao, inclusos):
-        return self.viagemDao.addViagem(destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, imagem_url, descricao, inclusos)
+    def createViagem(self, destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, tipo_onibus, descricao, inclusos):
+        return self.viagemDao.addViagem(destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, tipo_onibus, descricao, inclusos)
 
-    def updateViagem(self, id, destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, imagem_url, descricao, inclusos):
-        return self.viagemDao.attViagem(id, destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, imagem_url, descricao, inclusos)
+    def updateViagem(self, id, destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, tipo_onibus, descricao, inclusos):
+        return self.viagemDao.attViagem(id, destino, data_inicio, data_fim, preco, qtd_assentos, assentos_indisponiveis, tipo_onibus, descricao, inclusos)
 
     def deleteViagem(self, id):
         return self.viagemDao.delViagem(id)

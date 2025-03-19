@@ -16,15 +16,33 @@
     border-radius: 10px;
     width: 50%;
   }
+
   .modal-header, .modal-footer {
     text-align: center;
     padding: 10px;
   }
+
+  .modal-body{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .modal-body input, select{
+    border: 1px solid grey;
+    border-radius: 8px;
+    padding: 10px;
+  }
+
   .modal-footer button {
-    padding: 10px 20px;
-    background-color: #4CAF50;
+    width: 100%;
+    margin-top: 12px;
+    font-size: 14px;
+    padding: 16px;
+    background-color: #26992a;
+    border-radius: 8px;
     color: white;
-    border: none;
+    border: 1px solid rgb(4, 95, 4);
     cursor: pointer;
   }
   .modal-footer button:hover {

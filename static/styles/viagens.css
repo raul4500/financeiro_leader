@@ -56,29 +56,95 @@ h1 {
     color: white;
 }
 
-.adicionar-viagem{
+.opcoes-viagens button.fechar-inputs {
+    cursor: pointer;
+    background-color: rgba(255, 0, 0, 0.801);
+    color: rgb(255, 255, 255);
+    border: 1px solid rgb(110, 0, 0);
+}
+
+.opcoes-viagens button.fechar-inputs:hover {
+    background-color: rgb(255, 179, 179);
+    color: rgb(0, 0, 0);
+}
+
+.flashes .error{
+    background-color: rgb(255, 168, 168);
+    border: 1px solid red;
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.flashes .success{
+    background-color: rgb(196, 255, 168);
+    border: 1px solid rgb(43, 255, 0);
+    border-radius: 8px;
+    padding: 8px;
+    margin-bottom: 8px;
+}
+
+.cadastrar-viagem{
     height: 0;
     border-radius: 8px;
     background-color: rgba(225, 255, 225, 0.658);
     margin-bottom: 16px;
     padding: 0 12px 0 12px;
     display: flex;
-    flex-direction: column;
-    gap: 12px;
+    flex-direction: row;
+    justify-content: space-between;
     overflow: hidden;
     transition: 1s;
+    border: 1px solid rgb(160, 160, 160);
 }
 
-.adicionar-viagem.active{
-    height: 370px;
+.cadastrar-viagem.active{
+    height: 340px;
     padding: 12px;
     border: 1px solid rgb(39, 53, 25);
 }
 
-.adicionar-viagem input{
+.cadastrar-viagem .left{
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    height: auto;
+}
+
+.cadastrar-viagem .left .dates{
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+
+.cadastrar-viagem .right{
+    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+    height: auto;
+}
+
+.cadastrar-viagem input, textarea, select{
+    font-family: Arial, Helvetica, sans-serif;
     border: 1px solid grey;
     padding: 12px 8px 12px 8px;
     border-radius: 8px;
+}
+
+.cadastrar-viagem button {
+    padding: 16px;
+    cursor: pointer;
+    background-color: rgb(186, 255, 203);
+    color: rgb(0, 0, 0);
+    border: 1px solid green;
+    border-radius: 8px;
+}
+
+.cadastrar-viagem button:hover{
+    background-color: rgb(38, 139, 64);
+    color: white;
 }
 
 .tabela-viagens {

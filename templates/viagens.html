@@ -22,6 +22,9 @@
             <a href="/viagens">
                 <div class="sidebar-item"><i class="bi bi-airplane-fill"></i></div>
             </a>
+            <a href="">
+                <div class="sidebar-item"><i class="bi bi-credit-card-fill"></i></div>
+            </a>
             <a href="" class="bell">
                 <div class="sidebar-item"><i class="bi bi-bell-fill"></i></div>
             </a>
@@ -33,26 +36,65 @@
                 <h1>Viagens</h1>
                 <div class="opcoes-viagens" id="opcoes-viagens">
                     <input type="text" placeholder="Nome">
-                    <button class="adicionar" id="adicionar" onclick="abrirInputs()"><i class="bi bi-plus" style="font-size: 16px;"></i>Adicionar Viagem</button>
+                    <button class="adicionar" id="adicionar" onclick="abrirInputs()">+ Cadastrar Viagem</button>
+                    <button class="fechar-inputs" id="fechar-inputs" onclick="fecharInputs()" style="display: none;">X
+                        Cancelar</button>
                 </div>
 
-                <div class="adicionar-viagem" id="adicionar-viagem">
-                    <label for="destino">destino:</label>
-                    <input type="text" id="destino" name="destino" required placeholder="Digite o nome">
-
-                    <label for="data_inicio">data_inicio:</label>
-                    <input type="date" id="data_inicio" name="data_inicio" maxlength="9" required placeholder="Digite o data_inicio">
-
-                    <label for="data_fim">data_fim:</label>
-                    <input type="date" id="data_fim" name="data_fim" maxlength="9" required placeholder="Digite o data_fim">
-
-                    <label for="nascimento">Data de Nascimento:</label>
-                    <input type="date" id="nascimento" name="nascimento">
-
-                    <label for="telefone">Telefone:</label>
-                    <input type="tel" id="telefone" name="telefone" maxlength="11" required vplaceholder="Digite o telefone">
-
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                <div class=flashes>
+                    {% for category, message in messages %}
+                    <div class="{{ category }}">{{ message }}</div>
+                    {% endfor %}
                 </div>
+                {% endif %}
+                {% endwith %}
+
+                <form class="cadastrar-viagem" id="cadastrar-viagem" action="/cadastrar_viagem" method="post">
+                    <div class="left">
+                        <label for="destino">Destino:</label>
+                        <input type="text" id="destino" name="destino" required
+                            placeholder="Digite o destino da viagem...">
+
+                        <div class="dates">
+                            <div class="left">
+                                <label for="data_inicio">Data_inicio:</label>
+                                <input type="date" id="data_inicio" name="data_inicio" maxlength="9" required
+                                    placeholder="Digite a data_inicio da viagem...">
+                            </div>
+                            <div class="right">
+                                <label for="data_fim">Data_fim:</label>
+                                <input type="date" id="data_fim" name="data_fim" maxlength="9" required
+                                    placeholder="Digite a data_fim da viagem...">
+                            </div>
+                        </div>
+                        <label for="preco">Preco:</label>
+                        <input type="number" id="preco" name="preco" required>
+
+                        <label for="tipo_onibus">Tipo de ônibus:</label>
+                        <select name="tipo_onibus" id="tipo_onibus" required>
+                            <option value="leito">Leito</option>
+                            <option value="semi_leito">Semi-leito</option>
+                        </select>
+
+                    </div>
+                    <div class="right">
+                        <label for="qtd_assentos">qtd_assentos:</label>
+                        <input type="number" id="qtd_assentos" name="qtd_assentos" maxlength="11" required
+                            vplaceholder="Digite a quantidade de assentos do ônibus...">
+
+                        <label for="descricao">Descricão:</label>
+                        <textarea id="descricao" name="descricao" required placeholder="Descricão da viagem..."
+                            style="resize: none;"></textarea>
+
+                        <label for="inclusos">Inclusos:</label>
+                        <textarea type="text" id="inclusos" name="inclusos" required
+                            placeholder="Separe por vírgulas (,)" style="resize: none;"></textarea>
+
+                        <button type="submit">Confirmar</button>
+                    </div>
+                </form>
 
                 <div class="tabela-viagens">
                     <table cellspacing="0" rules="none">
@@ -69,7 +111,8 @@
                                 <i class='bi bi-bus-front-fill'></i>
                             </td>
                             <td>
-                                <div class="nome"><a href="/viagem/{{ v.id }}">16/03 - Monte Verde</a></div>
+                                <div class="nome"><a href="/viagem/{{ v.id }}">{{ v.data_inicio }} - {{ v.destino }}</a>
+                                </div>
                             </td>
                             <td><button><i class="bi bi-pencil-fill"></i></button></td>
                             <td></td>
@@ -88,11 +131,23 @@
 
 <script>
     function abrirInputs() {
-        let inputs = document.getElementById("adicionar-viagem");
+        let inputs = document.getElementById("cadastrar-viagem");
+        document.getElementById("adicionar").style.display = "none";
+        document.getElementById("fechar-inputs").style.display = "block";
         if (inputs) {
             inputs.classList.add('active'); // Adiciona a classe 'active'
         }
     }
+
+    function fecharInputs() {
+        let inputs = document.getElementById("cadastrar-viagem");
+        document.getElementById("adicionar").style.display = "block";
+        document.getElementById("fechar-inputs").style.display = "none";
+        if (inputs) {
+            inputs.classList.remove('active'); // Remove a classe 'active'
+        }
+    }
+
 </script>
 
 </html>
