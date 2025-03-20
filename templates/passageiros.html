@@ -24,7 +24,7 @@
       </a>
       <a href="">
         <div class="sidebar-item"><i class="bi bi-credit-card-fill"></i></div>
-    </a>
+      </a>
       <a href="" class="bell">
         <div class="sidebar-item"><i class="bi bi-bell-fill"></i></div>
       </a>
@@ -41,9 +41,62 @@
             onkeyup="searchClient('Telefone', 3)">
           <input type="text" id="searchInputStatus" placeholder="Status" onkeyup="searchClient('Status', 4)">
           <input type="text" id="searchInputRegistro" placeholder="Registro" onkeyup="searchClient('Registro', 5)">
-          <button class="adicionar-passageiro" id="openModalBtn"><i class="bi bi-plus"
+          <button class="adicionar-passageiro" onclick="abrirInputs()"><i class="bi bi-plus"
               style="font-size: 16px;"></i>Adicionar Passageiro</button>
         </div>
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class=flashes>
+          {% for category, message in messages %}
+          <div class="{{ category }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <form class="cadastrar-passageiro" id="cadastrar-passageiro" action="/cadastrar_passageiro" method="post">
+          <div class="left">
+            <label for="nome">Nome:</label>
+            <input type="text" id="nome" name="nome" required placeholder="Digite o nome do passageiro...">
+
+            <label for="rg">RG:</label>
+            <input type="text" id="rg" name="rg" maxlength="12" required placeholder="99.999.999-9">
+
+            <label for="telefone">Telefone:</label>
+            <input type="text" id="telefone" name="telefone" maxlength="15" placeholder="(99) 99999-9999">
+
+            <div class="left">
+              <label for="nascimento">Data de inicio:</label>
+              <input type="date" id="nascimento" name="nascimento" placeholder="Digite a data de nascimento...">
+            </div>
+
+            <label for="preco">Preco:</label>
+            <input type="number" id="preco" name="preco" required>
+
+            <label for="tipo_onibus">Tipo de ônibus:</label>
+            <select name="tipo_onibus" id="tipo_onibus" required>
+              <option value="leito">Leito</option>
+              <option value="semi_leito">Semi-leito</option>
+            </select>
+
+          </div>
+          <div class="right">
+            <label for="qtd_assentos">qtd_assentos:</label>
+            <input type="number" id="qtd_assentos" name="qtd_assentos" maxlength="11" required
+              vplaceholder="Digite a quantidade de assentos do ônibus...">
+
+            <label for="descricao">Descricão:</label>
+            <textarea id="descricao" name="descricao" required placeholder="Descricão da viagem..."
+              style="resize: none;"></textarea>
+
+            <label for="inclusos">Inclusos:</label>
+            <textarea type="text" id="inclusos" name="inclusos" required placeholder="Separe por vírgulas (,)"
+              style="resize: none;"></textarea>
+
+            <button onclick="ver()">Confirmar</button>
+          </div>
+        </form>
 
         <div class="tabela-passageiros">
           <table cellspacing="0" rules="none">
@@ -57,15 +110,15 @@
               </tr>
               {% for p in passageiros %}
             <tbody id="clientTableBody">
-                <td>
-                  <button onclick="toggleBlock(this)"><i class='bi bi-three-dots-vertical'></i></button>
-                  <div class="action-block" style="display: none;">
-                    <ul>
-                      <li><a href="">Editar</a></li>
-                      <li><a href="">Excluir</a></li>
-                    </ul>
-                  </div>
-                </td>
+              <td>
+                <button onclick="toggleBlock(this)"><i class='bi bi-three-dots-vertical'></i></button>
+                <div class="action-block" style="display: none;">
+                  <ul>
+                    <li><a href="">Editar</a></li>
+                    <li><a href="">Excluir</a></li>
+                  </ul>
+                </div>
+              </td>
               <td>
                 <div class="nome">{{ p.nome }}</div>
               </td>
@@ -74,7 +127,7 @@
               <td>{{ p.status }}</td>
               <td>{{ p.created_at }}</td>
             </tbody>
-              {% endfor %}
+            {% endfor %}
           </table>
         </div>
 
@@ -85,6 +138,37 @@
 
 
 </body>
+
+<script>
+  document.getElementById("rg").addEventListener("input", function (e) {
+      let rg = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+
+      // Aplica a máscara no formato 99.999.999-9
+      rg = rg.replace(/^(\d{2})(\d{3})(\d{3})(\d{0,1}).*/, "$1.$2.$3-$4");
+
+      e.target.value = rg;
+  });
+
+  function ver(){
+    alert(document.getElementById("rg").value)
+    alert(document.getElementById("telefone").value)
+    alert(document.getElementById("nome").value)
+  }
+</script>
+
+<script>
+  document.getElementById("telefone").addEventListener("input", function (e) {
+      let telefone = e.target.value.replace(/\D/g, ""); // Remove tudo que não for número
+
+      if (telefone.length > 10) {
+          telefone = telefone.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
+      } else {
+          telefone = telefone.replace(/^(\d{2})(\d{4})(\d{0,4}).*/, "($1) $2-$3");
+      }
+
+      e.target.value = telefone;
+  });
+</script>
 
 <script>
   function searchClient(i, cell) {
@@ -130,6 +214,27 @@
       });
     }
   });
+</script>
+
+<script>
+  function abrirInputs() {
+      let inputs = document.getElementById("cadastrar-passageiro");
+      //document.getElementById("adicionar").style.display = "none";
+      //document.getElementById("fechar-inputs").style.display = "block";
+      if (inputs) {
+          inputs.classList.add('active'); // Adiciona a classe 'active'
+      }
+  }
+
+  function fecharInputs() {
+      let inputs = document.getElementById("cadastrar-passageiro");
+      //document.getElementById("adicionar").style.display = "block";
+      //document.getElementById("fechar-inputs").style.display = "none";
+      if (inputs) {
+          inputs.classList.remove('active'); // Remove a classe 'active'
+      }
+  }
+
 </script>
 
 </html>

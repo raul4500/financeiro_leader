@@ -99,15 +99,15 @@ h1 {
 }
 
 .cadastrar-viagem.active{
-    height: 340px;
+    height: 400px;
     padding: 12px;
     border: 1px solid rgb(39, 53, 25);
 }
 
 .cadastrar-viagem .left{
-    gap: 12px;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     width: 48%;
     height: auto;
 }
@@ -119,9 +119,9 @@ h1 {
 }
 
 .cadastrar-viagem .right{
-    gap: 12px;
     display: flex;
     flex-direction: column;
+    justify-content: space-evenly;
     width: 48%;
     height: auto;
 }
