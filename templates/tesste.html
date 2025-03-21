@@ -21,10 +21,12 @@
             padding: 16px 0 0 0;
             overflow: hidden;
         }
+
         .sidebar-right.active {
-          padding: 16px; 
-          right: 0;
+            padding: 16px;
+            right: 0;
         }
+
         .toggle-btn-right {
             position: fixed;
             top: 20px;
@@ -36,6 +38,7 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
         .search-box {
             width: 100%;
             padding: 8px;
@@ -43,25 +46,31 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
         .clients-table {
             width: 100%;
             height: 300px;
             overflow-y: auto;
             border: 1px solid #ccc;
         }
+
         table {
             width: 100%;
             border-collapse: collapse;
         }
-        th, td {
+
+        th,
+        td {
             padding: 8px;
             border: 1px solid #ddd;
             text-align: left;
         }
+
         th {
             background-color: #007bff;
             color: white;
         }
+
         .seat-container {
             display: flex;
             flex-wrap: wrap;
@@ -69,6 +78,7 @@
             margin: 50px auto;
             gap: 10px;
         }
+
         .seat {
             width: 80px;
             height: 80px;
@@ -80,6 +90,7 @@
             cursor: pointer;
             border: 2px solid #333;
         }
+
         .drag-item {
             cursor: grab;
             padding: 5px;
@@ -108,37 +119,41 @@
         </div>
 
         <div class="sidebar-right" id="sidebarRight" onclick="event.stopPropagation()">
-        <h2>Clientes</h2>
-        <input type="text" class="search-box" id="searchInput" onkeyup="searchClient()" placeholder="Buscar nome...">
-        <div class="clients-table">
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Nome</th>
-                    </tr>
-                </thead>
-                <tbody id="clientTableBody">
-                    {% for p in passageiros %}
-                    <tr draggable="true" class="drag-item" ondragstart="drag(event)"><td>{{ p.id }}</td><td>{{ p.nome }}</td></tr>
-                    {% endfor %}
-                </tbody>
-            </table>
+            <h2>Clientes</h2>
+            <input type="text" class="search-box" id="searchInput" onkeyup="searchClient()"
+                placeholder="Buscar nome...">
+            <div class="clients-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nome</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clientTableBody">
+                        {% for p in passageiros %}
+                        <tr draggable="true" class="drag-item" ondragstart="drag(event)">
+                            <td>{{ p.id }}</td>
+                            <td>{{ p.nome }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
-    </div>
 
 
         <div class="container">
 
             <div class="header">
                 <div class="block">
-                <i class="bi bi-border-all"></i>
-                <p>Mapa</p>
-            </div>
-            <div class="block">
-                <i class="bi bi-table"></i>
-                <p>Dados</p>
-            </div>
+                    <i class="bi bi-border-all"></i>
+                    <p>Mapa</p>
+                </div>
+                <div class="block">
+                    <i class="bi bi-table"></i>
+                    <p>Dados</p>
+                </div>
             </div>
             <button class="toggle-btn-right" onclick="toggleSidebar(event)">☰</button>
 
@@ -147,19 +162,19 @@
                     <tr>
                         <td colspan="7" style="height: 50px; font-size: 2.5vw;">
                             <center>
-                                <h3>APARECIDA DO NORTE</h3>
+                                <h3>{{ viagem.destino }}</h3>
                             </center>
                         </td>
                         <td colspan="2" style="background-color: rgb(115, 187, 67);">
                             <center>
-                                <h2>Saída: 20/12/2025</h2>
+                                <h2>Saída: {{ viagem.data_inicio }}</h2>
                             </center>
                         </td>
                     </tr>
                     <tr>
                         <td colspan="7">
                             <center>
-                                <h2>Mapa de Assentos</h2>
+                                <h2>Mapa de viagem</h2>
                             </center>
                         </td>
                         <td colspan="2" style="background-color: rgb(115, 187, 67);">
@@ -170,7 +185,7 @@
                     </tr>
                     <tr>
                         <td colspan="7">
-                            <h2 style="text-align: right; color: red;">R$ {preco}</h2>
+                            <h2 style="text-align: right; color: red;">R$ {{ viagem.preco }}</h2>
                         </td>
                         <td colspan="2">
                             <p style="font-size: 14px; color: red;">(PARA MEMBROS DO GRUPO)</p>
@@ -179,18 +194,18 @@
                     <tr>
                         <td colspan="9">
                             <center>
-                                <h2 style="font-size: 16px; color: red;">OU 6X DE R$ {VALOR.PARCELADO}</h2>
+                                <h2 style="font-size: 16px; color: red;">OU 6X DE R$ {{ (viagem.preco)/6 }}</h2>
                             </center>
                         </td>
                     </tr>
 
                     {% set count = 0 %}
-                    {% if assentos == 49 or assentos > 49 and count == 0 %}
+                    {% if viagem.qtd_assentos == 49 or viagem.qtd_assentos > 49 and count == 0 %}
                     <tr class="piso">
                         <td colspan="9">Piso Superior</td>
                     </tr>
                     {% endif %}
-                    {% for i in range(1, assentos + 1, 4) %}
+                    {% for i in range(1, viagem.qtd_assentos + 1, 4) %}
                     {% if i == 49 and count == 0 %}
                     <tr class="piso">
                         <td colspan="9">Piso Inferior</td>
@@ -199,36 +214,54 @@
                     {% endif %}
                     <tr>
                         {% if i % 2 != 0 %}
-                        {% if i == assentos %}
+                        {% if i == viagem.qtd_assentos %}
                         <td class="assento" id="assento_{{ i }}" style="opacity: 0; border: none"></td>
                         <td class="assento" id="assento_{{ i }}">{{ i }}</td>
-                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
-                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" style="opacity: 0; border: none"></td>
-                        {% elif i + 1 == assentos %}
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')"
+                            ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" style="opacity: 0; border: none">
+                        </td>
+                        {% elif i + 1 == viagem.qtd_assentos %}
                         <td class="assento" id="assento_{{ i }}">{{ i }}</td>
                         <td class="assento" id="assento_{{ i + 1 }}">{{ i + 1 }}</td>
-                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
-                        <td class="nome" id="assento_{{ i+1 }}" name="assento_{{ i+1 }}" onclick="highlightSeat('{{ i + 1 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
-                        {% elif i + 2 == assentos %}
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')"
+                            ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i+1 }}" name="assento_{{ i+1 }}"
+                            onclick="highlightSeat('{{ i + 1 }}')" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        </td>
+                        {% elif i + 2 == viagem.qtd_assentos %}
                         <td class="assento" id="assento_{{ i }}">{{ i }}</td>
                         <td class="assento" id="assento_{{ i + 1 }}">{{ i + 1 }}</td>
-                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
-                        <td class="nome" id="assento_{{ i + 1 }}" name="assento_{{ i + 1 }}" onclick="highlightSeat('{{ i + 1 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')"
+                            ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i + 1 }}" name="assento_{{ i + 1 }}"
+                            onclick="highlightSeat('{{ i + 1 }}')" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        </td>
                         <td class="space"></td>
                         <td class="assento" id="assento_{{ i }}" style="opacity: 0; border: none"></td>
                         <td class="assento" id="assento_{{ i + 2 }}">{{ i + 2 }}</td>
-                        <td class="nome" id="assento_{{ i + 2 }}" name="assento_{{ i + 2 }}" onclick="highlightSeat('{{ i + 2 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
-                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" style="opacity: 0; border: none"></td>
+                        <td class="nome" id="assento_{{ i + 2 }}" name="assento_{{ i + 2 }}"
+                            onclick="highlightSeat('{{ i + 2 }}')" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        </td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" style="opacity: 0; border: none">
+                        </td>
                         {% else %}
                         <td class="assento" id="assento_{{ i }}">{{ i }}</td>
                         <td class="assento" id="assento_{{ i + 1 }}">{{ i + 1 }}</td>
-                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
-                        <td class="nome" id="assento_{{ i + 1 }}" name="assento_{{ i + 1 }}" onclick="highlightSeat('{{ i + 1 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i }}" name="assento_{{ i }}" onclick="highlightSeat('{{ i }}')"
+                            ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i + 1 }}" name="assento_{{ i + 1 }}"
+                            onclick="highlightSeat('{{ i + 1 }}')" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        </td>
                         <td class="space"></td>
                         <td class="assento" id="assento_{{ i + 3 }}">{{ i + 3 }}</td>
                         <td class="assento" id="assento_{{ i + 2 }}">{{ i + 2 }}</td>
-                        <td class="nome" id="assento_{{ i + 3 }}" name="assento_{{ i + 3 }}" onclick="highlightSeat('{{ i + 3 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
-                        <td class="nome" id="assento_{{ i + 2 }}" name="assento_{{ i + 2 }}" onclick="highlightSeat('{{ i + 2 }}')" ondragover="allowDrop(event)" ondrop="drop(event)"></td>
+                        <td class="nome" id="assento_{{ i + 3 }}" name="assento_{{ i + 3 }}"
+                            onclick="highlightSeat('{{ i + 3 }}')" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        </td>
+                        <td class="nome" id="assento_{{ i + 2 }}" name="assento_{{ i + 2 }}"
+                            onclick="highlightSeat('{{ i + 2 }}')" ondragover="allowDrop(event)" ondrop="drop(event)">
+                        </td>
                         {% endif %}
                         {% endif %}
                     </tr>
@@ -238,38 +271,23 @@
 
             <button id="baixar">Baixar PDF</button>
         </div>
+
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
 
     <script>
-        document.getElementById("baixar").onclick = function () {
-            const tabela = document.getElementById("tabela");
-
-            // Configuração do HTML2PDF para gerar o PDF
-            const opt = {
-                margin: 1,
-                filename: 'tabela.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
-                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-
-            // Gerar o PDF a partir da tabela mantendo os estilos
-            html2pdf().from(tabela).set(opt).save();
-        };
-
         function toggleSidebar(event) {
             let sidebar = document.getElementById("sidebarRight");
             sidebar.classList.toggle("active");
             event.stopPropagation();
-            
+
             if (sidebar.classList.contains("active")) {
                 document.addEventListener("click", closeSidebar);
             } else {
                 document.removeEventListener("click", closeSidebar);
             }
         }
-        
+
         function closeSidebar(event) {
             let sidebar = document.getElementById("sidebarRight");
             if (!sidebar.contains(event.target)) {
@@ -277,17 +295,17 @@
                 document.removeEventListener("click", closeSidebar);
             }
         }
-        
+
         function searchClient() {
             let input = document.getElementById("searchInput").value.toLowerCase();
             let rows = document.querySelectorAll("#clientTableBody tr");
-            
+
             rows.forEach(row => {
                 let name = row.cells[1].textContent.toLowerCase();
                 row.style.display = name.includes(input) ? "" : "none";
             });
         }
-        
+
 
         function highlightSeat(seatId) {
             // Primeiro, removemos a classe 'selected' de todas as células e botões
@@ -298,7 +316,7 @@
             allSeats.forEach(seat => seat.classList.remove('selected'));
 
             // Adicionamos a classe 'selected' ao botão clicado e à célula de assento correspondente
-            const button = document.querySelector(`button[onclick="highlightSeat(${seatId })"]`);
+            const button = document.querySelector(`button[onclick="highlightSeat(${seatId})"]`);
             const seat = document.getElementById(`assento_${seatId}`);
 
             if (button) {
@@ -312,16 +330,17 @@
         function drag(event) {
             event.dataTransfer.setData("text", event.target.innerText);
         }
-        
+
         function allowDrop(event) {
             event.preventDefault();
         }
-        
+
         function drop(event) {
             event.preventDefault();
             let name = event.dataTransfer.getData("text");
             if (event.target.classList.contains("nome")) {
                 event.target.innerText = name;
+                alert(event.target.id)
             }
         }
     </script>

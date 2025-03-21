@@ -1,5 +1,5 @@
 from database import db
-from sqlalchemy import Column, Integer, String, Float, Date
+from sqlalchemy import Column, Integer, String, Float, Date, JSON
 from sqlalchemy.orm import relationship
 
 class Viagem(db.Model):
@@ -10,7 +10,7 @@ class Viagem(db.Model):
     preco = db.Column(db.Float, nullable=False)
     qtd_assentos = db.Column(db.Integer, nullable=False)
     tipo_onibus = db.Column(db.String(12), nullable=False)
-    assentos_indisponiveis = db.Column(db.Integer, nullable=True)
+    assentos_indisponiveis = db.Column(db.JSON, nullable=True, default=[])  # Alterado para JSON
     descricao = db.Column(db.String(400), nullable=False)
     inclusos = db.Column(db.String(400), nullable=False)
     # Relacionamento: Uma viagem pode ter várias reservas
@@ -28,7 +28,7 @@ class Viagem(db.Model):
             "preco": self.preco,
             "qtd_assentos": self.qtd_assentos,
             "tipo_onibus": self.tipo_onibus,
-            "assentos_indisponiveis": self.assentos_indisponiveis,
+            "assentos_indisponiveis": self.assentos_indisponiveis,  # Incluindo a lista no JSON
             "descricao": self.descricao,
             "inclusos": self.inclusos,
             #"reservas": [reserva.toJson() for reserva in self.reservas]

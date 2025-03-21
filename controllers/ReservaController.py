@@ -8,9 +8,12 @@ reserva_controller = Blueprint('reserva_controller', __name__)
 
 reservaRepository = ReservaRepository()
 viagemRepository = ViagemRepository()
+passageiroRepository = PassageiroRepository()
 
-@reserva_controller.route('/reservar/<int:id>', methods=['GET'])
-def index(id):
-    usuario = cookies_session.get('usuario_email')
-    viagem = viagemRepository.getViagem(id)
-    return render_template('reservar.html', usuario=usuario, viagem=viagem)
+@reserva_controller.route('/reservar/<int:viagem_id>/<int:passageiro_id>', methods=['GET', 'POST'])
+def index(viagem_id, passageiro_id):
+    passageiro = passageiroRepository.getPassageiro(passageiro_id)
+    viagem = viagemRepository.getViagem(viagem_id)
+    if passageiro and viagem:
+        reservaRepository.createReserva(passageiro_id, viagem_id)
+    return redirect(url_for('viagem_controller.teste'))

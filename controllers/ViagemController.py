@@ -15,11 +15,6 @@ def index():
     viagens = viagemRepository.getAllViagens()
     return render_template('viagens.html', viagens=viagens)
 
-@viagem_controller.route('/mapa')
-def teste():
-    passageiros = passageiroRepository.getAllPassageiros()
-    return render_template('tesste.html', passageiros=passageiros, assentos=46)
-
 @viagem_controller.route('/cadastrar_viagem', methods=['GET','POST'])
 def cadastrar_viagem():
     if request.method == 'POST':
@@ -72,6 +67,13 @@ def update_viagem(viagem_id):
         flash('Viagem atualizada com sucesso.')
         return redirect(url_for('viagem_controller.index'))
     return render_template('update_viagem.html', viagem=viagem)
+
+@viagem_controller.route('/viagem/<int:viagem_id>')
+def teste(viagem_id):
+    passageiros = passageiroRepository.getAllPassageiros()
+    viagem = viagemRepository.getViagem(viagem_id)
+    return render_template('tesste.html', passageiros=passageiros, viagem=viagem)
+
 
 #    min_price = request.args.get('min_price', 0, type=int)
 #    max_price = request.args.get('max_price', float('inf'), type=int)
